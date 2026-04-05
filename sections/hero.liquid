@@ -4,13 +4,14 @@
   <div class="hero-left">
     <div class="hero-eyebrow">
       <span class="hero-eyebrow-line"></span>
-      <span class="hero-eyebrow-text">Ready to Eat &middot; Authentic Recipes</span>
+      <span class="hero-eyebrow-text">{{ section.settings.eyebrow | escape }}</span>
       <span class="hero-eyebrow-line"></span>
     </div>
-    <h1 class="hero-title">Taste the <em>Soul</em> of<br>Indian Cuisine<br>at Home</h1>
-    <p class="hero-desc">Handcrafted Gujarati &amp; North Indian ready-to-eat meals &mdash; traditional recipes, premium ingredients, zero compromise.</p>
+    <h1 class="hero-title">{{ section.settings.title_line_1 | escape }}<br>{{ section.settings.title_line_2 | escape }}</h1>
+    <p class="hero-desc">{{ section.settings.description | escape }}</p>
     <div class="hero-btns">
-      <a href="/collections/all" class="btn-royal">Shop Now</a>
+      <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="btn-royal">{{ section.settings.primary_cta_label | escape }}</a>
+      <a href="{{ section.settings.secondary_cta_link | default: '/collections/all' }}" class="btn-ghost">{{ section.settings.secondary_cta_label | escape }}</a>
     </div>
     <div class="hero-stats">
       <div><div class="stat-num">20+</div><div class="stat-label">Dishes</div></div>
@@ -20,27 +21,15 @@
     <div class="hero-trust-badges">
       <div class="hero-trust-badge">
         <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-check"></use></svg>
-        <span>No Preservatives</span>
+        <span>Ready in 3–5 mins</span>
       </div>
       <div class="hero-trust-badge">
         <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-check"></use></svg>
-        <span>No Added Colors</span>
-      </div>
-      <div class="hero-trust-badge">
-        <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-leaf"></use></svg>
-        <span>100% Natural</span>
-      </div>
-      <div class="hero-trust-badge">
-        <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-leaf"></use></svg>
-        <span>Made with 100% Groundnut Oil</span>
+        <span>No Preservatives</span>
       </div>
       <div class="hero-trust-badge">
         <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-truck"></use></svg>
-        <span>Travel Friendly</span>
-      </div>
-      <div class="hero-trust-badge">
-        <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-shield"></use></svg>
-        <span>Export Quality</span>
+        <span>Travel-Friendly Packs</span>
       </div>
     </div>
   </div>
@@ -113,7 +102,7 @@
           <a href="{{ featured.url }}" style="text-decoration:none">
             <div class="hs-main-img-wrap">
               <img src="{{ featured.featured_image | img_url: '800x800' }}" alt="{{ featured.title | escape }}">
-              <div class="hs-main-overlay"><div class="hs-main-tag">Best Seller</div></div>
+              <div class="hs-main-overlay"><div class="hs-main-tag">{{ section.settings.featured_tag | escape }}</div></div>
             </div>
             <div class="hs-main-info">
               <div>
@@ -157,7 +146,14 @@
 {
   "name": "Hero Banner",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow Text", "default": "Ready to Eat" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow Text", "default": "Authentic Indian Ready-to-Eat" },
+    { "type": "text", "id": "title_line_1", "label": "Title Line 1", "default": "Indian Comfort Food," },
+    { "type": "text", "id": "title_line_2", "label": "Title Line 2", "default": "Wherever You Are." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Made for students, professionals, and travelers abroad who miss real home-style Indian taste — ready in minutes." },
+    { "type": "text", "id": "primary_cta_label", "label": "Primary CTA Label", "default": "Order Ready Meals" },
+    { "type": "url", "id": "primary_cta_link", "label": "Primary CTA Link" },
+    { "type": "text", "id": "secondary_cta_label", "label": "Secondary CTA Label", "default": "Explore Combos" },
+    { "type": "url", "id": "secondary_cta_link", "label": "Secondary CTA Link" },
     { "type": "text", "id": "featured_tag", "label": "Featured Badge", "default": "Best Seller" }
   ],
   "presets": [{ "name": "Hero Banner" }]
