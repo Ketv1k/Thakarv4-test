@@ -1,0 +1,21 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Thakar Kitchen Royal",
+    "theme_version": "4.0.0",
+    "theme_author": "Thakar Kitchen",
+    "theme_documentation_url": "https://thakarkitchen.com",
+    "theme_support_url": "https://thakarkitchen.com/pages/contact"
+  },
+  {
+    "name": "Announcement",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement Text",
+        "default": "Free delivery on orders above \u20b9500 \u00b7 Use code THAKAR10 for 10% off"
+      }
+    ]
+  }
+]

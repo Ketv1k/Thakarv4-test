@@ -1,0 +1,52 @@
+<section class="categories" id="cats-home">
+    <div class="section-header">
+      <div class="section-eyebrow">Browse By Region</div>
+      <h2 class="section-title">Our <em>Categories</em></h2>
+      <div class="section-ornament"><span class="section-ornament-line"></span><span class="section-ornament-diamond"></span><span class="section-ornament-line r"></span></div>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card" id="tk-cat-ni">
+        <div class="cat-card-inner cat-ni">
+          <div class="cat-pattern"></div>
+          <div class="cat-glow"></div>
+          <div class="cat-icon"><svg width="44" height="44" style="display:inline-block;vertical-align:middle;flex-shrink:0;color:var(--gold-light)"><use href="#ico-bowl"/></svg></div>
+          <div class="cat-label">North Indian</div>
+          <div class="cat-sub">10 Products · Rich & Bold Flavours</div>
+          <div class="cat-cta">Explore Collection →</div>
+        </div>
+        <div class="cat-inner-border"></div>
+      </div>
+      <div class="cat-card" id="tk-cat-gj">
+        <div class="cat-card-inner cat-gj">
+          <div class="cat-pattern"></div>
+          <div class="cat-glow"></div>
+          <div class="cat-icon"><svg width="44" height="44" style="display:inline-block;vertical-align:middle;flex-shrink:0;color:var(--gold-light)"><use href="#ico-flame"/></svg></div>
+          <div class="cat-label">Gujarati</div>
+          <div class="cat-sub">10 Products · Sweet-Savory Heritage</div>
+          <div class="cat-cta">Explore Collection →</div>
+        </div>
+        <div class="cat-inner-border"></div>
+      </div>
+    </div>
+  </section>
+
+<script>
+(function(){
+  var ni = document.getElementById('tk-cat-ni');
+  var gj = document.getElementById('tk-cat-gj');
+  if(ni) ni.addEventListener('click', function(e){ e.stopPropagation(); window.location.href = '/collections/north-indian'; });
+  if(gj) gj.addEventListener('click', function(e){ e.stopPropagation(); window.location.href = '/collections/gujarati'; });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Categories",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Categories"
+    }
+  ]
+}
+{% endschema %}

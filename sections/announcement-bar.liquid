@@ -1,0 +1,13 @@
+<div class="announcement">
+  <span>{{ section.settings.text }}</span>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {"type": "text", "id": "text", "label": "Text", "default": "Free delivery on orders above ₹500 · Use code THAKAR10 for 10% off"}
+  ],
+  "presets": [{"name": "Announcement Bar"}]
+}
+{% endschema %}

@@ -1,0 +1,165 @@
+<section class="hero">
+  <div class="hero-pattern"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-line"></span>
+      <span class="hero-eyebrow-text">Ready to Eat &middot; Authentic Recipes</span>
+      <span class="hero-eyebrow-line"></span>
+    </div>
+    <h1 class="hero-title">Taste the <em>Soul</em> of<br>Indian Cuisine<br>at Home</h1>
+    <p class="hero-desc">Handcrafted Gujarati &amp; North Indian ready-to-eat meals &mdash; traditional recipes, premium ingredients, zero compromise.</p>
+    <div class="hero-btns">
+      <a href="/collections/all" class="btn-royal">Shop Now</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">20+</div><div class="stat-label">Dishes</div></div>
+      <div><div class="stat-num">10K+</div><div class="stat-label">Customers</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">Pure</div></div>
+    </div>
+    <div class="hero-trust-badges">
+      <div class="hero-trust-badge">
+        <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-check"></use></svg>
+        <span>No Preservatives</span>
+      </div>
+      <div class="hero-trust-badge">
+        <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-check"></use></svg>
+        <span>No Added Colors</span>
+      </div>
+      <div class="hero-trust-badge">
+        <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-leaf"></use></svg>
+        <span>100% Natural</span>
+      </div>
+      <div class="hero-trust-badge">
+        <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-leaf"></use></svg>
+        <span>Made with 100% Groundnut Oil</span>
+      </div>
+      <div class="hero-trust-badge">
+        <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-truck"></use></svg>
+        <span>Travel Friendly</span>
+      </div>
+      <div class="hero-trust-badge">
+        <svg width="13" height="13" style="color:var(--gold-light,#E8B84B);flex-shrink:0"><use href="#ico-shield"></use></svg>
+        <span>Export Quality</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-bestseller-strip">
+    <div class="hbs-label">
+      <svg width="14" height="14" style="color:var(--gold,#C9960C);flex-shrink:0"><use href="#ico-award"></use></svg>
+      <span>Best Sellers</span>
+    </div>
+    <div class="hbs-products">
+      {% assign bs_handles = 'undhiyu,paneer-but-masala,pau-bhaji,vakhareli-khichadi' | split: ',' %}
+      {% for handle in bs_handles %}
+      {% assign product = all_products[handle] %}
+      {% assign r_rating = '4.5' %}{% assign r_count = '80+' %}{% assign r_sold = '30+' %}
+      {% case handle %}
+        {% when 'undhiyu' %}{% assign r_rating = '4.9' %}{% assign r_count = '186' %}{% assign r_sold = '43' %}
+        {% when 'vakhareli-khichadi' %}{% assign r_rating = '4.7' %}{% assign r_count = '178' %}{% assign r_sold = '31' %}
+        {% when 'pau-bhaji' %}{% assign r_rating = '4.8' %}{% assign r_count = '211' %}{% assign r_sold = '52' %}
+        {% when 'paneer-but-masala' %}{% assign r_rating = '4.9' %}{% assign r_count = '247' %}{% assign r_sold = '67' %}
+      {% endcase %}
+      {% if product.id %}
+        <a href="{{ product.url }}" class="hbs-card">
+          {% if product.featured_image %}
+            <div class="hbs-img-wrap">
+              <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title | escape }}" loading="lazy">
+              {% if product.compare_at_price_min > product.price_min %}
+                {% assign diff = product.compare_at_price_min | minus: product.price_min %}
+                {% assign pct = diff | times: 100 | divided_by: product.compare_at_price_min %}
+                <div class="hbs-badge">-{{ pct }}%</div>
+              {% endif %}
+            </div>
+          {% endif %}
+          <div class="hbs-info">
+            <div class="hbs-name">{{ product.title | remove: 'Ready To Eat ' | truncate: 22 }}</div>
+            <div class="hbs-rating">
+              <span class="hbs-stars">★★★★★</span>
+              <span class="hbs-rcount">{{ r_count }}</span>
+            </div>
+            <div class="hbs-price-row">
+              {% if product.compare_at_price_min > product.price_min %}
+                <span class="hbs-old">{{ product.compare_at_price_min | money }}</span>
+              {% endif %}
+              <span class="hbs-new">{{ product.price_min | money }}</span>
+            </div>
+            <div class="hbs-urgency">🔥 {{ r_sold }} sold this week</div>
+            <div class="pc-atc-wrap" data-product-id="{{ product.id }}" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+              {% form 'product', product, data-product-title: product.title %}
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <button type="submit" name="add" class="hbs-atc" onclick="event.stopPropagation()">Add +</button>
+              {% endform %}
+              <div class="pc-qty-ctrl hbs-qty-ctrl" id="pc-qty-{{ product.id }}" style="display:none">
+                <button type="button" class="qty-btn" onclick="event.stopPropagation();event.preventDefault();pcQtyChange('{{ product.id }}',-1)">&#8722;</button>
+                <span class="qty-num" id="pc-qty-num-{{ product.id }}">1</span>
+                <button type="button" class="qty-btn" onclick="event.stopPropagation();event.preventDefault();pcQtyChange('{{ product.id }}',1)">+</button>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <a href="/collections/all" class="hbs-view-all">View All 20 Products &rarr;</a>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-showcase">
+      {% assign featured = all_products['undhiyu'] %}
+      {% if featured.id %}
+        <div class="hs-main">
+          <a href="{{ featured.url }}" style="text-decoration:none">
+            <div class="hs-main-img-wrap">
+              <img src="{{ featured.featured_image | img_url: '800x800' }}" alt="{{ featured.title | escape }}">
+              <div class="hs-main-overlay"><div class="hs-main-tag">Best Seller</div></div>
+            </div>
+            <div class="hs-main-info">
+              <div>
+                <div class="hs-main-name">{{ featured.title | remove: 'Ready To Eat ' }}</div>
+                <div class="hs-main-sub">{{ featured.type }} &middot; 300g</div>
+              </div>
+              <div class="hs-main-price">
+                {% if featured.compare_at_price_min > featured.price_min %}
+                  <span class="hs-price-old">{{ featured.compare_at_price_min | money }}</span>
+                {% endif %}
+                <span class="hs-price-new">{{ featured.price_min | money }}</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endif %}
+      <div class="hs-grid">
+        {% assign grid_handles = 'vakhareli-khichadi,pau-bhaji,paneer-but-masala' | split: ',' %}
+        {% for handle in grid_handles %}
+          {% assign gp = all_products[handle] %}
+          {% if gp.id %}
+            <a href="{{ gp.url }}" class="hs-card" style="text-decoration:none">
+              <img src="{{ gp.featured_image | img_url: '300x300' }}" alt="{{ gp.title | escape }}">
+              <div class="hs-card-body">
+                <div class="hs-card-name">{{ gp.title | remove: 'Ready To Eat ' }}</div>
+                <div class="hs-card-price">{{ gp.price_min | money }}</div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="hs-badge-rating">
+        <div class="hs-badge-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="hs-badge-text">4.9 / 5 &middot; 2000+ reviews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow Text", "default": "Ready to Eat" },
+    { "type": "text", "id": "featured_tag", "label": "Featured Badge", "default": "Best Seller" }
+  ],
+  "presets": [{ "name": "Hero Banner" }]
+}
+{% endschema %}

@@ -1,0 +1,31 @@
+<div class="page-header"><h1>Search <em>Results</em></h1></div>
+<div style="padding:60px 8%;background:var(--cream-dark,#F5EDD8)">
+  <form action="/search" method="get" style="max-width:500px;margin:0 auto 48px;display:flex;gap:10px">
+    <input type="hidden" name="type" value="product">
+    <input type="text" name="q" value="{{ search.terms | escape }}" class="search-input" placeholder="Search products...">
+    <button type="submit" class="search-btn"><svg width="16" height="16" style="color:#fff"><use href="#ico-search"></use></svg></button>
+  </form>
+  {% if search.performed %}
+    {% if search.results_count == 0 %}
+      <p style="text-align:center;color:var(--muted,#7A7A99)">No results for "{{ search.terms }}"</p>
+    {% else %}
+      <div class="products-grid">
+        {% for item in search.results %}
+          {% if item.object_type == 'product' %}{% render 'product-card', product: item %}{% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Search Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Search Page"
+    }
+  ]
+}
+{% endschema %}

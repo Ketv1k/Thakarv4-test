@@ -1,0 +1,31 @@
+<div class="page-header">
+  <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <span>{{ collection.title | default: "All Products" }}</span></div>
+  <h1>{{ collection.title | default: "All Products" }}</h1>
+</div>
+<div class="products-section light" style="padding-top:48px">
+  <div class="search-wrap">
+    <input class="search-input" id="search-input" type="text" placeholder="Search products..." oninput="runSearch()">
+    <button class="search-btn" onclick="runSearch()">
+      <svg width="16" height="16" style="color:#fff"><use href="#ico-search"></use></svg>
+    </button>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="setFilter(this,'all')">All</button>
+    <button class="filter-chip" onclick="setFilter(this,'gujarati')">Gujarati</button>
+    <button class="filter-chip" onclick="setFilter(this,'north indian')">North Indian</button>
+    <button class="filter-chip" onclick="setFilter(this,'popular')">Popular</button>
+    <button class="filter-chip" onclick="setFilter(this,'top rated')">Top Rated</button>
+  </div>
+  <div class="products-grid" id="shop-products-grid">
+    {% for product in collection.products %}
+      {% render 'product-card', product: product %}
+    {% else %}
+      <p style="color:var(--muted);text-align:center;padding:40px;grid-column:1/-1">No products found.</p>
+    {% endfor %}
+  </div>
+  <div id="shop-no-results" style="display:none;text-align:center;padding:40px;color:var(--muted)">No products match your search.</div>
+</div>
+
+{% schema %}
+{"name": "Collection Page", "settings": [], "presets": [{"name": "Collection Page"}]}
+{% endschema %}

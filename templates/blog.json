@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "ann": {
+      "type": "announcement-bar",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ann",
+    "main"
+  ]
+}

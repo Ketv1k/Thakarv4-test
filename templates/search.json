@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "ann": {
+      "type": "announcement-bar",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-search",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ann",
+    "main"
+  ]
+}

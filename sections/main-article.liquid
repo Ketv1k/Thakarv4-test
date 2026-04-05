@@ -1,0 +1,14 @@
+<div class="page-header"><h1>{{ article.title }}</h1><p>{{ article.published_at | date: "%B %d, %Y" }}</p></div>
+<div style="padding:60px 8%;background:var(--cream,#FDFAF3);max-width:800px">{{ article.content }}</div>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Article"
+    }
+  ]
+}
+{% endschema %}

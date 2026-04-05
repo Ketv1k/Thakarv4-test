@@ -1,0 +1,972 @@
+{% assign variant = product.selected_or_first_available_variant %}
+{% assign weight = product.metafields.custom.weight | default: '300g' %}
+{% assign flavour = product.metafields.custom.flavour | default: 'Authentic Indian Style' %}
+{% assign ingredients_str = product.metafields.custom.ingredients %}
+{% if ingredients_str == blank %}
+  {% case product.handle %}
+    {% when 'bharela-bateta' %}
+      {% assign ingredients_str = 'Vegetables (potato,onion, tomato, green chillies, garlic,) (64%), groundnut oil (4.5%), cocunut powder,peanuts,Iodised salt,Red chili powder, turmeric powder, Coriander powder,Mixed spices(Cinnamon leaves,cassia, stone flower), asafoetida, coriander leaves, cumin, mustard seeds,curry leaves, water' %}
+    {% when 'bharela-ringana' %}
+      {% assign ingredients_str = 'vegetables (Egg plant, garlic, onion, tomato, green chillies) (68%), groundnut oil (4.2%), cocunut powder,peanuts,asafoetida, coriander,Iodised SALT,Red chili powder, turmeric powder, Coriander powder,cumin, mustard seeds,Mixed spices(Cinnamon leaves,cassia, stone flower),curry leaves, water' %}
+    {% when 'dal-taraka' %}
+      {% assign ingredients_str = 'Pigeon Peas(toor dal)(40%),vegetables(onion, tomato, green chillie, garlic)(6%),groundnut oil(3.8%),butter, cumin, dried fenugreek leaves, coriander leaves,iodised salt, red chilly powder, dried red chilles,turmeric powder, coriander powder,water' %}
+    {% when 'deshi-chana' %}
+      {% assign ingredients_str = 'Chana (60%), vegetables (tomato, green chillies, ginger, onion, garlic)(12%), ground nut oil(5%), cocunut powder,coriander,salt,Red chili powder, red chilly dry, turmeric powder, Coriander powder, asafoetida, cumin, mustard seeds,curry leaves, water' %}
+    {% when 'gujrati-dal' %}
+      {% assign ingredients_str = 'Pigeon pea lentis(60%), Vegetables (tomato, green chillies, ginger,corrinerder) (5%) ,Ground nut oil(2.3%),jaggery,peanuts,dry dates,asafoetida, gram flour,cocunut powder, Lemon jucie, Salt,Red chili powder, Red chilly dry, turmeric powder, Coriander powder,Mixed spices(Cinnamon leaves,cassia, stone flower),cloves, star anise, bay leaf, cumin, mustard seeds,curry leaves,water' %}
+    {% when 'kaju-butter-masala' %}
+      {% assign ingredients_str = 'Vegetables (Onion , toamto, garlic)(68%), cashew(10%),Cottage cheese (9%),Butter, cream, cheese, Milk solids, Groundnut oil,cinnamon, cloves, star anise, cardomom,cumin, mustard seeds, bay leaf, nutmeg, cashew nuts, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, coriander powder,Mixed Spices ( Black pepper, Dried ginger, Fennel, Cassia, Fenugreek leaves, Cardamom amomum, Mace, Asafoetida), coriander leaves, coconut powder, water' %}
+    {% when 'kathiyawadi-kadhi' %}
+      {% assign ingredients_str = 'vegetables(onion, garlic,tomato, green chillies, ginger)(3.9%)Buttermilk(38%),groundnut oil(1.5%), gram flour, salt, Red chili powder, turmeric powder, Coriander powder, Red dried chillies, asafoetida,curry leaves, coriander leaves, water' %}
+    {% when 'methi-papad' %}
+      {% assign ingredients_str = 'Vegetables(FENUGREEK, tomato, green chillies, garlic)(45%), papad(25%), Groundnutoil(6%), Iodised salt,buttermilk, cream, Red chili powder, turmeric powder, Coriander powder, cumin, mustard seeds,curry leaves, water' %}
+    {% when 'mag' %}
+      {% assign ingredients_str = 'Green gram (50%),vegetabels ( green chillies, ginger, garlic,toamato)(10%),Gronudnut oil(3%),coconut powder,coriander,buttermilk, Iodised salt,Red chili powder, red chilly dry, turmeric powder, Coriander powder,Mixed spices(Cinnamon leaves,cassia, stone flower),asafoetida, mustard seeds,curry leaves,water' %}
+    {% when 'mutter-paneer' %}
+      {% assign ingredients_str = 'Vegetables (Onion , toamto, green peas, capcicum, garlic, )(71%), Cottage cheese (18%),Butter, cream, Milk solids, Groundnut oil,cinnamon, cloves, star anise, cardomom,cumin, mustard seeds, bay leaf, nutmeg, cashew nuts, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, coriander powder,Mixed Spices ( Black pepper, Dried ginger, Fennel, Cassia, Fenugreek leaves, Cardamom amomum, Mace, Asafoetida), coriander leaves, coconut powder, water' %}
+    {% when 'paneer-but-masala' %}
+      {% assign ingredients_str = 'Vegetables (Onion , toamto, capcicum, garlic)(65%), Cottage cheese (22%),cream, butter, Milk solids, Groundnut oil,cinnamon, cloves, star anise, cardomom,cumin, mustard seeds, bay leaf, nutmeg, cashew nuts, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, coriander powder,Mixed Spices ( Black pepper, Dried ginger, Fennel, Cassia, Fenugreek leaves, Cardamom amomum, Mace, Asafoetida), coriander leaves, coconut powder, water' %}
+    {% when 'paneer-rajwadi' %}
+      {% assign ingredients_str = 'Vegetables (Onion , toamto, capcicum, garlic)(68%), Cottage cheese (19%),Butter, cream, cheese, Milk solids, Groundnut oil,cinnamon, cloves, star anise, cardomom,cumin, mustard seeds, bay leaf, nutmeg, cashew nuts, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, coriander powder,Mixed Spices ( Black pepper, Dried ginger, Fennel, Cassia, Fenugreek leaves, Cardamom amomum, Mace, Asafoetida), coriander leaves, coconut powder, water' %}
+    {% when 'paneer-tikka' %}
+      {% assign ingredients_str = 'Vegetables (Onion , toamto, capcicum, garlic)(68%), Cottage cheese (20%),Butter, cream, Milk solids, Groundnut oil,cinnamon, cloves, star anise, cardomom,cumin, mustard seeds, bay leaf, nutmeg, cashew nuts, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, coriander powder,Mixed Spices ( Black pepper, Dried ginger, Fennel, Cassia, Fenugreek leaves, Cardamom amomum, Mace, Asafoetida), coriander leaves, coconut powder, water' %}
+    {% when 'pau-bhaji' %}
+      {% assign ingredients_str = 'Vegetables(Potato,onion ,tomato,capcicum,egg plant, spinach, cauliflower, cabbage,green peas,garlic)(56%),grounnut oil(15%),butter,Iodised salt, turmeric powder, red chilly powder,cumin, Mixed spices(Dried Mango, Cassia Leaf, Black Pepper, Cassia Bark (Tai), Clove, Dried Ginger, Star Anise, Fennel, Black Cardamom), coriander leaves, water' %}
+    {% when 'punjabi-chhole' %}
+      {% assign ingredients_str = 'Vegetables (Onion, tomato, garlic)(42%),Chickpeas(30%), Groundnut oil,cumin, mustard seeds, cinnamon, cloves, star anise, cardomom, cashew nuts,bayleaf, nutmeg, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, corinader powder, Mixed spices( Dried Mango,Mint Leaf, Pomegranate seed,Black Pepper, Fennel, Dried Ginger, Black Salt, Mace, Caraway, Black Cardamom,Bishop s Weed(ajwain), Asafoetida,Cassai, Tamarind and Citric Acid),corinander leaves, coconut powder, water' %}
+    {% when 'bateta' %}
+      {% assign ingredients_str = 'VEGETABLES(POTATO, TOMATO, GREEN CHILLIES, GINGER, CORRIENDER (78%), GROUND NUT OIL (14%), COCUNUT POWDER,peanuts, iodised SALT,Red chili powder, turmeric powder, Coriander powder,Mixed spices(Cinnamon leaves,cassia, stone flower),Cinnamon, cloves, star anise, bay leaf, cumin, mustard seeds,curry leaves,ASAFOETIDA, WATER' %}
+    {% when 'undhiyu' %}
+      {% assign ingredients_str = 'Vegetables (POTATO, CABBAGE, Tomato, CLSUTER BEANS, Hyacinth Beans, SWEET POTATO, egg plant, BOTTLE GROUD, BROAD BEAN, Ginger, Yam, Green chillies) (55%), Ground nut oil (15%), peanuts, cloves, star anise, bay leaf, cumin, mustard seeds, curry leaves, Red chili powder, turmeric powder, Coriander powder, Iodised salt, Mixed spices (Cinnamon leaves, cassia, stone flower), Coconut powder, banana, sugar, cashew, lemon juice, gram flour, coriander leaves, Asafoetida, water' %}
+    {% when 'dal-makhani' %}
+      {% assign ingredients_str = 'Kidney beans(21%),Black Gram(18%), Chickpeas (8%),vegetables(tomato, green chillie, garlic, ginger)(6%),Desi Ghee(5%),groundnut oil(3.8%),butter,cream, cumin, coriander leaves,iodised salt, red chilly powder,turmeric powder, coriander powder,Spices and condiments, water' %}
+    {% when 'palak-paneer' %}
+      {% assign ingredients_str = 'Paneer (20%), Spinach (40%), Vegetables (Onion, Tomato, Garlic, Ginger, Green Chillies) (25%), Groundnut Oil, Cream, Cumin Seeds, Turmeric, Red Chilli Powder, Coriander Powder, Garam Masala, Kasuri Methi, Iodised Salt, Lemon Juice' %}
+    {% when 'shahi-paneer' %}
+      {% assign ingredients_str = 'Paneer (20%), Vegetables (Onion, Tomato, Garlic, Ginger) (65%), Groundnut Oil, Cream, Cashews, Cardamom, Cinnamon, Clove, Bay Leaf, Turmeric, Red Chilli Powder, Coriander Powder, Garam Masala, Saffron, Iodised Salt, Sugar' %}
+    {% when 'rajwadi-undhiyu' %}
+      {% assign ingredients_str = 'Vegetables (POTATO, CABBAGE, Tomato, CLSUTER BEANS, Hyacinth Beans, SWEET POTATO, egg plant, BOTTLE GROUD, BROAD BEAN, Ginger, Yam, Green chillies) (55%), Ground nut oil (15%), peanuts, cloves, star anise, bay leaf, cumin, mustard seeds, curry leaves, Red chili powder, turmeric powder, Coriander powder, Iodised salt, Mixed spices (Cinnamon leaves, cassia, stone flower), Coconut powder, banana, sugar, cashew, lemon juice, gram flour, coriander leaves, Asafoetida, water' %}
+    {% when 'rajwadi-bateka' %}
+      {% assign ingredients_str = 'VEGETABLES(POTATO, TOMATO, GREEN CHILLIES, GINGER, CORRIENDER (78%), GROUND NUT OIL (14%), COCUNUT POWDER,peanuts, iodised SALT,Red chili powder, turmeric powder, Coriander powder,Mixed spices(Cinnamon leaves,cassia, stone flower),Cinnamon, cloves, star anise, bay leaf, cumin, mustard seeds,curry leaves,ASAFOETIDA, WATER' %}
+    {% when 'bharela-bateka' %}
+      {% assign ingredients_str = 'Vegetables (potato,onion, tomato, green chillies, garlic,) (64%), groundnut oil (4.5%), cocunut powder,peanuts,Iodised salt,Red chili powder, turmeric powder, Coriander powder,Mixed spices(Cinnamon leaves,cassia, stone flower), asafoetida, coriander leaves, cumin, mustard seeds,curry leaves, water' %}
+    {% when 'desi-chana' %}
+      {% assign ingredients_str = 'Chana (60%), vegetables (tomato, green chillies, ginger, onion, garlic)(12%), ground nut oil(5%), cocunut powder,coriander,salt,Red chili powder, red chilly dry, turmeric powder, Coriander powder, asafoetida, cumin, mustard seeds,curry leaves, water' %}
+    {% when 'gujarati-dal' %}
+      {% assign ingredients_str = 'Pigeon pea lentis(60%), Vegetables (tomato, green chillies, ginger,corrinerder) (5%) ,Ground nut oil(2.3%),jaggery,peanuts,dry dates,asafoetida, gram flour,cocunut powder, Lemon jucie, Salt,Red chili powder, Red chilly dry, turmeric powder, Coriander powder,Mixed spices(Cinnamon leaves,cassia, stone flower),cloves, star anise, bay leaf, cumin, mustard seeds,curry leaves,water' %}
+    {% when 'mug-masala' %}
+      {% assign ingredients_str = 'Green gram (50%),vegetabels ( green chillies, ginger, garlic,toamato)(10%),Gronudnut oil(3%),coconut powder,coriander,buttermilk, Iodised salt,Red chili powder, red chilly dry, turmeric powder, Coriander powder,Mixed spices(Cinnamon leaves,cassia, stone flower),asafoetida, mustard seeds,curry leaves,water' %}
+    {% when 'pav-bhaji' %}
+      {% assign ingredients_str = 'Vegetables(Potato,onion ,tomato,capcicum,egg plant, spinach, cauliflower, cabbage,green peas,garlic)(56%),grounnut oil(15%),butter,Iodised salt, turmeric powder, red chilly powder,cumin, Mixed spices(Dried Mango, Cassia Leaf, Black Pepper, Cassia Bark (Tai), Clove, Dried Ginger, Star Anise, Fennel, Black Cardamom), coriander leaves, water' %}
+    {% when 'punjabi-chole' %}
+      {% assign ingredients_str = 'Vegetables (Onion, tomato, garlic)(42%),Chickpeas(30%), Groundnut oil,cumin, mustard seeds, cinnamon, cloves, star anise, cardomom, cashew nuts,bayleaf, nutmeg, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, corinader powder, Mixed spices( Dried Mango,Mint Leaf, Pomegranate seed,Black Pepper, Fennel, Dried Ginger, Black Salt, Mace, Caraway, Black Cardamom,Bishop s Weed(ajwain), Asafoetida,Cassai, Tamarind and Citric Acid),corinander leaves, coconut powder, water' %}
+    {% when 'paneer-butter-masala' %}
+      {% assign ingredients_str = 'Vegetables (Onion , toamto, capcicum, garlic)(65%), Cottage cheese (22%),cream, butter, Milk solids, Groundnut oil,cinnamon, cloves, star anise, cardomom,cumin, mustard seeds, bay leaf, nutmeg, cashew nuts, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, coriander powder,Mixed Spices ( Black pepper, Dried ginger, Fennel, Cassia, Fenugreek leaves, Cardamom amomum, Mace, Asafoetida), coriander leaves, coconut powder, water' %}
+    {% when 'paneer-tikka-masala' %}
+      {% assign ingredients_str = 'Vegetables (Onion , toamto, capcicum, garlic)(68%), Cottage cheese (20%),Butter, cream, Milk solids, Groundnut oil,cinnamon, cloves, star anise, cardomom,cumin, mustard seeds, bay leaf, nutmeg, cashew nuts, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, coriander powder,Mixed Spices ( Black pepper, Dried ginger, Fennel, Cassia, Fenugreek leaves, Cardamom amomum, Mace, Asafoetida), coriander leaves, coconut powder, water' %}
+    {% when 'dal-tadka' %}
+      {% assign ingredients_str = 'Pigeon Peas(toor dal)(40%),vegetables(onion, tomato, green chillie, garlic)(6%),groundnut oil(3.8%),butter, cumin, dried fenugreek leaves, coriander leaves,iodised salt, red chilly powder, dried red chilles,turmeric powder, coriander powder,water' %}
+    {% when 'rajwadi-dhokali','rajwadi-dhokli' %}
+      {% assign ingredients_str = 'Gram flour (38%), Vegetabels (Tomato ,Gralic ) (12%), Groundnut oil( 5%), plain Cream, Buttermilk, Mustrad, Cumin , Iodiesd salt, red chilly powder, turmeric powder, corinder leafs, Corinder seeds, Spices and condiments, water' %}
+    {% when 'vaghareli-khichdi','vaghareli-khichadi','vakhareli-khichadi' %}
+      {% assign ingredients_str = 'Rice, Groundnut Oil, Mustard Seeds, Cumin, Curry Leaves, Green Chillies, Turmeric Powder, Iodised Salt, Asafoetida, Water' %}
+    {% when 'sabudana-khichadi' %}
+      {% assign ingredients_str = 'Sago (50%), Vegetables ( Patato, Green chillies)(10%), Peanuts, Cumin, Iodiesd salt, red chilly powder, turmeric powder, Black pepper, Corinder leafs, Curry leafs, Water' %}
+    {% when 'sabudana-khichdi' %}
+      {% assign ingredients_str = 'Sago (50%), Vegetables ( Patato, Green chillies)(10%), Peanuts, Cumin, Iodiesd salt, red chilly powder, turmeric powder, Black pepper, Corinder leafs, Curry leafs, Water' %}
+    {% when 'kaju-gathiya' %}
+      {% assign ingredients_str = 'Gathiya (40%), Cashew (20%),Vegetabels (Onion,Tomato ,Gralic,Ginger ) (12%), Groundnut oil( 5%),Gram Flour, Buttermilk, Mustrad, Cumin , Iodiesd salt, red chilly powder, turmeric powder, corinder leafs, Corinder seeds, Spices and condiments, water' %}
+    {% when 'rajma' %}
+      {% assign ingredients_str = 'Kidney beans (40%),Vegetabels (Onion,Tomato ,Gralic,Ginger, Green chillies ) (12%), Groundnut oil( 5%),Gram Flour, Cumin , Iodiesd salt, red chilly powder, turmeric powder, corinder leafs, Corinder seeds, Spices and condiments, water' %}
+    {% when 'sev-tameta' %}
+      {% assign ingredients_str = 'Vegetables ( Tomato, green chilles) 38%, Gram flour 18%, Groundnutoil 10%, sugar, dried red chillies, mustard, turmeric powder, cumin, Coriander leafs, Spices and condiments, water' %}
+    {% when 'veg-kolhapuri','veg-kohlapuri' %}
+      {% assign ingredients_str = 'Vegetables (onion, tomato, capcisum, green chillie, garlic,carrot, french beans, cauliflower,cabbage,green peas)(73%), Cottage cheese,cheese, milk solids,cream, butter,Groundnut oil,cinnamon, cloves, star anise, cardomom,cumin, mustard seeds, bay leaf, nutmeg, cashew nuts, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, coriander powder,Mixed Spices ( Black pepper, Dried ginger, Fennel, Cassia, Fenugreek leaves, Cardamom amomum, Mace, Asafoetida), coconut powder, coriander leaves, water' %}
+    {% when 'veg-rajwadi' %}
+      {% assign ingredients_str = 'Vegetables (onion, tomato, capcisum, green chillie, garlic,carrot, french beans, cauliflower,cabbage,green peas)(71%), Cottage cheese,cheese, milk solids,cream, butter,Groundnut oil,cinnamon, cloves, star anise, cardomom,cumin, mustard seeds, bay leaf, nutmeg, cashew nuts, watermelon seeds, Iodised salt, red chilly powder, turmeric powder, coriander powder,Mixed Spices ( Black pepper, Dried ginger, Fennel, Cassia, Fenugreek leaves, Cardamom amomum, Mace, Asafoetida), coconut powder, coriander leaves, water' %}
+    {% else %}
+      {% assign ingredients_str = 'Groundnut Oil, Fresh Vegetables, Spices, Iodised Salt' %}
+  {% endcase %}
+{% endif %}
+{% assign compare_price = product.compare_at_price_min %}
+{% assign sell_price = product.price_min %}
+{% assign savings_pct = 0 %}
+{% if compare_price > sell_price %}
+  {% assign diff = compare_price | minus: sell_price %}
+  {% assign savings_pct = diff | times: 100 | divided_by: compare_price %}
+{% endif %}
+
+<div class="pd-header">
+  <div class="pd-breadcrumb">
+    <a href="/" style="color:rgba(255,255,255,.35)">Home</a> &rsaquo;
+    {% if product.collections.first %}
+      <a href="{{ product.collections.first.url }}" style="color:rgba(255,255,255,.35)">{{ product.collections.first.title }}</a> &rsaquo;
+    {% else %}
+      <a href="/collections/all" style="color:rgba(255,255,255,.35)">Shop</a> &rsaquo;
+    {% endif %}
+    <span style="color:var(--gold-light,#E8B84B)">{{ product.title | remove: 'Ready To Eat ' }}</span>
+  </div>
+</div>
+
+<div class="pd-top">
+  <div class="product-gallery">
+    <div class="gallery-main-wrap">
+      {% if savings_pct > 0 %}<div class="gallery-badge">-{{ savings_pct }}%</div>{% endif %}
+      {% if product.featured_image %}
+        <img class="gallery-main-img" id="gallery-main-img"
+             src="{{ product.featured_image | img_url: '800x800' }}"
+             alt="{{ product.featured_image.alt | default: product.title | escape }}">
+      {% endif %}
+    </div>
+    {% if product.images.size > 1 %}
+    <div class="gallery-thumbs">
+      {% for image in product.images %}
+        <img class="gallery-thumb {% if forloop.first %}active{% endif %}"
+             src="{{ image | img_url: '150x150' }}"
+             alt="{{ image.alt | default: product.title | escape }}"
+             onclick="switchGalleryImg('{{ image | img_url: '800x800' }}', this)">
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="pd-buy-box">
+    <div class="product-detail-cat">{{ product.type }}</div>
+    <h1 class="product-detail-name">{{ product.title }}</h1>
+    <div class="pd-pills">
+      <span class="pd-pill pd-pill-weight">
+        <svg width="14" height="14" style="color:var(--gold,#C9960C);margin-right:4px;vertical-align:middle"><use href="#ico-scale"></use></svg>
+        {{ weight }}
+      </span>
+      <span class="pd-pill pd-pill-flavour">
+        <svg width="14" height="14" style="color:var(--royal,#1B2A6B);margin-right:4px;vertical-align:middle"><use href="#ico-chili"></use></svg>
+        {{ flavour }}
+      </span>
+      <span class="pd-pill pd-pill-veg">
+        <svg width="14" height="14" style="color:green;margin-right:4px;vertical-align:middle"><use href="#ico-veg"></use></svg>
+        100% Veg
+      </span>
+    </div>
+    {% comment %}Product-specific rating{% endcomment %}
+  
+  {% case product.handle %}
+    {% when 'undhiyu' %}
+      {% assign pd_rating = '4.9' %}{% assign pd_count = '186' %}
+    {% when 'bateta' %}
+      {% assign pd_rating = '4.6' %}{% assign pd_count = '143' %}
+    {% when 'bharela-bateta' %}
+      {% assign pd_rating = '4.4' %}{% assign pd_count = '127' %}
+    {% when 'bharela-ringana' %}
+      {% assign pd_rating = '4.2' %}{% assign pd_count = '98' %}
+    {% when 'gujrati-dal' %}
+      {% assign pd_rating = '4.8' %}{% assign pd_count = '212' %}
+    {% when 'deshi-chana' %}
+      {% assign pd_rating = '4.5' %}{% assign pd_count = '93' %}
+    {% when 'kathiyawadi-kadhi' %}
+      {% assign pd_rating = '4.5' %}{% assign pd_count = '108' %}
+    {% when 'methi-papad' %}
+      {% assign pd_rating = '4.3' %}{% assign pd_count = '89' %}
+    {% when 'mag' %}
+      {% assign pd_rating = '4.4' %}{% assign pd_count = '112' %}
+    {% when 'vaghareli-khichdi','vakhareli-khichadi' %}
+      {% assign pd_rating = '4.7' %}{% assign pd_count = '178' %}
+    {% when 'kaju-butter-masala' %}
+      {% assign pd_rating = '4.9' %}{% assign pd_count = '203' %}
+    {% when 'paneer-tikka','paneer-tikka-masala' %}
+      {% assign pd_rating = '4.7' %}{% assign pd_count = '189' %}
+    {% when 'paneer-but-masala','paneer-butter-masala' %}
+      {% assign pd_rating = '4.9' %}{% assign pd_count = '247' %}
+    {% when 'paneer-rajwadi' %}
+      {% assign pd_rating = '4.6' %}{% assign pd_count = '134' %}
+    {% when 'mutter-paneer' %}
+      {% assign pd_rating = '4.7' %}{% assign pd_count = '167' %}
+    {% when 'punjabi-chhole','punjabi-chole' %}
+      {% assign pd_rating = '4.8' %}{% assign pd_count = '198' %}
+    {% when 'dal-taraka','dal-tadka' %}
+      {% assign pd_rating = '4.6' %}{% assign pd_count = '156' %}
+    {% when 'pau-bhaji','pav-bhaji' %}
+      {% assign pd_rating = '4.8' %}{% assign pd_count = '211' %}
+    {% when 'shahi-paneer' %}
+      {% assign pd_rating = '4.7' %}{% assign pd_count = '156' %}
+    {% when 'palak-paneer' %}
+      {% assign pd_rating = '4.6' %}{% assign pd_count = '172' %}
+    {% else %}
+      {% assign pd_rating = '4.5' %}{% assign pd_count = '80+' %}
+  {% endcase %}
+  {% assign pd_num = pd_rating | plus: 0 %}
+  <div class="pd-rating">
+      <span class="pd-stars" style="color:var(--gold,#C9960C);font-size:1rem;">{% if pd_num >= 4.5 %}★★★★★{% else %}★★★★☆{% endif %}</span>
+      <span class="pd-rating-count">{{ pd_rating }} &middot; {{ pd_count }} verified reviews</span>
+    </div>
+    <div class="product-detail-price-row">
+      {% if compare_price > sell_price %}
+        <span class="product-detail-old" style="font-size:1.1rem;color:#888;text-decoration:line-through;font-weight:600;letter-spacing:.02em">MRP: {{ compare_price | money }}</span>
+      {% endif %}
+      <span class="product-detail-new" style="font-size:2rem;font-weight:700;color:var(--royal-dark,#111C4E);font-family:'Cormorant Garamond',serif">{{ sell_price | money }}</span>
+      {% if savings_pct > 0 %}
+        <span class="product-detail-savings">Save {{ savings_pct }}%</span>
+      {% endif %}
+    </div>
+    <div class="product-detail-sku">SKU: {{ variant.sku | default: product.handle | upcase }}</div>
+
+    {% assign pd = "" %}
+    {% case product.handle %}
+      {% when 'undhiyu' %}
+        {% assign pd = 'A beloved Gujarati winter delicacy — sweet, earthy root vegetables and beans slow-cooked in a rich coconut-spice gravy. Mildly spiced, slightly sweet, deeply comforting. Best with puri or rotli.' %}
+      {% when 'bateta' %}
+        {% assign pd = 'Tender potatoes in a bold Rajwadi masala — mustard, cumin, coconut and warming spices. Slightly tangy, lightly spiced, with a dry-ish gravy that coats every piece perfectly. Best with roti or as a side.' %}
+      {% when 'bharela-bateta' %}
+        {% assign pd = 'Whole baby potatoes stuffed with a fragrant peanut-coconut masala, then slow-cooked in their own juices. Rich, nutty, mildly spiced with a slightly sweet finish. A Gujarati home-kitchen classic.' %}
+      {% when 'bharela-ringana' %}
+        {% assign pd = 'Small brinjals stuffed with a tangy peanut and sesame masala, cooked until meltingly soft. Deep, earthy flavour with a hint of sweetness and a mild smoky finish. Best with bajra rotla or roti.' %}
+      {% when 'gujrati-dal' %}
+        {% assign pd = 'Sweet-tangy-spiced Gujarati dal — a perfect balance of jaggery, tamarind and toor dal with a mustard-cumin tadka. Thin, flavourful and comforting. Eat with steamed rice and a drizzle of ghee.' %}
+      {% when 'deshi-chana' %}
+        {% assign pd = 'Hearty black chickpeas cooked in a robust onion-tomato masala with whole spices. Firm bite, deep flavour, mildly spicy. Filling on its own or as a side with puris.' %}
+      {% when 'kathiyawadi-kadhi' %}
+        {% assign pd = 'A thick, tangy, warmly spiced buttermilk kadhi from Kathiyawad — bolder and spicier than standard Gujarati kadhi. Comforting and aromatic. Best poured over steamed rice or khichdi.' %}
+      {% when 'methi-papad' %}
+        {% assign pd = 'Crispy papads cooked with fresh fenugreek, tomatoes and a sharp spice tadka — a uniquely Gujarati combination. Slightly bitter from the methi, tangy from tomatoes, and addictively crunchy. Great as a snack or with dal-rice.' %}
+      {% when 'mag' %}
+        {% assign pd = 'Whole green moong dal in a light, fragrant garlic-tomato gravy. Earthy, mildly spiced, slightly creamy. One of the most wholesome and easy-to-digest dishes — perfect for a light lunch or dinner.' %}
+      {% when 'vaghareli-khichdi' %}
+        {% assign pd = 'Comforting moong dal and rice khichdi tempered with mustard seeds, curry leaves and mild spices. Soft, wholesome, lightly salted. The ultimate comfort food — best topped with a spoonful of ghee.' %}
+      {% when 'kaju-butter-masala' %}
+        {% assign pd = 'Plump cashews in a velvety, mildly sweet tomato-cream gravy with whole spices. Rich, buttery and restaurant-style indulgent. Pairs beautifully with butter naan or jeera rice.' %}
+      {% when 'paneer-tikka' %}
+        {% assign pd = 'Firm paneer pieces in a smoky, tangy tikka masala — bold spices, capsicum, cream and a rich tomato base. Mildly hot, deeply aromatic. Best with rumali roti or steamed basmati.' %}
+      {% when 'paneer-but-masala' %}
+        {% assign pd = 'The classic — soft paneer cubes in a lush, creamy tomato-butter gravy. Mildly spiced, rich and indulgent with a slightly sweet finish. Goes perfectly with naan, roti or rice.' %}
+      {% when 'paneer-rajwadi' %}
+        {% assign pd = 'Paneer in a royal Rajwadi gravy — richer and more aromatic than standard paneer dishes, with saffron, whole spices and a creamy nut base. Mild heat, elegant flavour. Best with laccha paratha.' %}
+      {% when 'mutter-paneer' %}
+        {% assign pd = 'A timeless combination — soft paneer and sweet green peas in a tomato-onion masala. Medium spiced, slightly creamy, with a fresh garden flavour. Goes well with any Indian bread or rice.' %}
+      {% when 'punjabi-chhole' %}
+        {% assign pd = 'Robust Punjabi chickpeas in a deep, tangy, boldly spiced gravy with whole spices and dried mango. Dark, rich and intensely flavoured. Best with bhature, kulcha or steamed rice.' %}
+      {% when 'dal-taraka' %}
+        {% assign pd = 'Classic restaurant-style dal tadka — toor dal finished with a smoky butter-ghee tadka of cumin, garlic and dried red chilli. Warming, aromatic, slightly smoky. A perfect everyday dal with rice or roti.' %}
+      {% when 'pau-bhaji' %}
+        {% assign pd = 'Mumbai street-style pav bhaji — a thick, buttery mash of mixed vegetables spiced with pav bhaji masala. Tangy, spicy, deeply satisfying. Best with toasted buttered pav or as is.' %}
+      {% when 'shahi-paneer' %}
+        {% assign pd = 'Paneer in an indulgent, mildly sweet Mughlai-style gravy made with cream, cashews and fragrant whole spices. Delicate heat, saffron-tinged richness. Perfect for special occasions with naan or biryani rice.' %}
+      {% when 'palak-paneer' %}
+        {% assign pd = 'Fresh spinach puree with soft paneer cubes, mildly spiced with ginger, garlic and garam masala. Earthy, creamy, nutritious and mildly flavoured. A balanced, wholesome dish best with roti or rice.' %}
+    {% endcase %}
+    {% if pd != blank %}
+      <div class="product-short-desc">{{ pd }}</div>
+    {% endif %}
+    {% if product.available %}
+      <div class="stock-badge instock"><span class="dot"></span><span>In Stock &mdash; Ready to Ship</span></div>
+    {% else %}
+      <div class="stock-badge lowstock"><span class="dot"></span><span>Out of Stock</span></div>
+    {% endif %}
+    {% form 'product', product, id: 'product-form-main', data-product-title: product.title %}
+      <input type="hidden" name="id" value="{{ variant.id }}">
+  
+
+    <div class="pack-selector-wrap">
+      <div class="pack-selector">
+        {% assign pack_first_shown = false %}
+        {% for variant in product.variants %}
+          {% if variant.title == "1 Pack" %}
+            {% assign pack_count = 1 %}
+            {% assign pack_label = "1 Pouch" %}
+            {% assign pack_badge = "" %}
+          {% elsif variant.title == "Pack of 2" %}
+            {% assign pack_count = 2 %}
+            {% assign pack_label = "Pack of 2" %}
+            {% assign pack_badge = "4% OFF" %}
+          {% elsif variant.title == "Pack of 3" %}
+            {% assign pack_count = 3 %}
+            {% assign pack_label = "Pack of 3" %}
+            {% assign pack_badge = "6% OFF" %}
+          {% else %}
+            {% continue %}
+          {% endif %}
+          {% assign unit_price = variant.price | divided_by: pack_count %}
+          <button type="button"
+                  class="pack-btn{% unless pack_first_shown %} active{% endunless %}"
+                  data-variant-id="{{ variant.id }}"
+                  data-price="{{ variant.price | money }}">
+            <div class="pack-btn-header">
+              <span class="pack-btn-label">{{ pack_label }}</span>
+              {% if pack_badge != "" %}<span class="pack-badge">{{ pack_badge }}</span>{% endif %}
+            </div>
+            <div class="pack-btn-price">{{ variant.price | money }}</div>
+            <div class="pack-btn-unit">{{ unit_price | money }} / pouch</div>
+          </button>
+          {% assign pack_first_shown = true %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="product-detail-qty-row">
+        <div class="detail-qty">
+          <button type="button" class="qty-btn" id="qty-minus">&#8722;</button>
+          <input type="number" name="quantity" id="product-qty" value="1" min="1"
+                 style="width:40px;border:none;text-align:center;font-family:inherit;font-size:.95rem;font-weight:600;background:transparent;outline:none;color:var(--royal-dark,#111C4E)">
+          <button type="button" class="qty-btn" id="qty-plus">&#43;</button>
+        </div>
+        <button type="submit" name="add" class="detail-add-cart-btn"
+                {% unless product.available %}disabled{% endunless %}>
+          {% if product.available %}Add to Cart{% else %}Out of Stock{% endif %}
+        </button>
+        <p class="atc-free-delivery">🚚 Free Delivery on orders above ₹500</p>
+      </div>
+    {% endform %}
+
+<div class="sticky-atc" id="sticky-atc">
+  <div class="sticky-atc-inner">
+    <div class="sticky-atc-info">
+      <div class="sticky-atc-title">{{ product.title | remove: 'Ready To Eat ' | truncate: 28 }}</div>
+      <div class="sticky-atc-price">{{ sell_price | money }}</div>
+    </div>
+    <button type="button" class="sticky-atc-btn">Add to Cart</button>
+  </div>
+</div>
+
+    <div class="pincode-section">
+      <div class="pincode-label">
+        <svg width="14" height="14" style="color:var(--gold,#C9960C);margin-right:4px;vertical-align:middle"><use href="#ico-pin"></use></svg>
+        Check Delivery
+      </div>
+      <div class="pincode-row">
+        <input class="pincode-input" id="pincode-input" type="text" maxlength="6" placeholder="Enter your 6-digit pincode">
+        <button class="pincode-check-btn" type="button">Check</button>
+      </div>
+      <div class="pincode-result" id="pincode-result"></div>
+    </div>
+  </div>
+</div>
+
+<div class="pd-below">
+  <div class="pd-section pd-description-section">
+    <div class="pd-tabs-nav">
+      <button class="pd-tab-btn active" onclick="switchPdTab('ingredients',this)">Ingredients</button>
+      <button class="pd-tab-btn" onclick="switchPdTab('howto',this)">How to Prepare</button>
+      <button class="pd-tab-btn" onclick="switchPdTab('shelf',this)">Storage</button>
+    </div>
+    <div class="pd-tab-panel active" id="pdtab-ingredients">
+      <div class="ingredients-grid">
+        <div class="ing-block">
+          <h4>Ingredients</h4>
+          <div class="ing-list">
+            {% assign ing_arr = ingredients_str | split: ', ' %}
+            {% assign ing_num = 0 %}
+            {% for ing in ing_arr %}
+              {% assign ing_clean = ing | strip %}
+              {% if ing_clean != blank %}
+                {% assign ing_num = ing_num | plus: 1 %}
+                <div class="ing-row">
+                  <span class="ing-num">{{ ing_num }}</span>
+                  <span class="ing-name">{{ ing_clean }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <h4 style="margin-top:16px">Certifications</h4>
+          <div class="ing-tags">
+            <span class="ing-tag" style="background:rgba(34,139,34,.07);border-color:rgba(34,139,34,.25);color:green"><svg width="12" height="12" style="color:green;vertical-align:middle;margin-right:3px"><use href="#ico-check"></use></svg> FSSAI Certified</span>
+            <span class="ing-tag" style="background:rgba(34,139,34,.07);border-color:rgba(34,139,34,.25);color:green"><svg width="12" height="12" style="color:green;vertical-align:middle;margin-right:3px"><use href="#ico-check"></use></svg> 100% Vegetarian</span>
+            <span class="ing-tag" style="background:rgba(34,139,34,.07);border-color:rgba(34,139,34,.25);color:green"><svg width="12" height="12" style="color:green;vertical-align:middle;margin-right:3px"><use href="#ico-check"></use></svg> No Artificial Preservatives</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pd-tab-panel" id="pdtab-howto">
+      <p class="pd-howto-subtitle" style="margin-bottom:28px">Ready in minutes &mdash; two easy ways</p>
+      <div class="pd-howto-methods">
+        <div class="pd-method-card">
+          <div class="pd-method-title">
+            <div class="pd-method-icon-wrap microwave"><svg width="24" height="24" style="color:var(--royal,#1B2A6B)"><use href="#ico-microwave"></use></svg></div>
+            <div><div class="pd-method-name">Microwave Method</div><div class="pd-method-time">Ready in 2&ndash;3 minutes</div></div>
+          </div>
+          <div class="pd-steps">
+            <div class="pd-step"><div class="pd-step-num">1</div><div class="pd-step-content"><span class="pd-step-visual"><svg width="28" height="28" style="color:var(--royal,#1B2A6B)"><use href="#ico-box"></use></svg></span><div class="pd-step-title">Open the Pack</div><div class="pd-step-desc">Transfer contents into a microwave-safe bowl.</div></div></div>
+            <div class="pd-step"><div class="pd-step-num">2</div><div class="pd-step-content"><span class="pd-step-visual"><svg width="28" height="28" style="color:var(--royal,#1B2A6B)"><use href="#ico-microwave"></use></svg></span><div class="pd-step-title">Microwave on High</div><div class="pd-step-desc">Heat for 2&ndash;3 minutes until piping hot.</div></div></div>
+            <div class="pd-step"><div class="pd-step-num">3</div><div class="pd-step-content"><span class="pd-step-visual"><svg width="28" height="28" style="color:var(--gold,#C9960C)"><use href="#ico-spoon"></use></svg></span><div class="pd-step-title">Stir and Check</div><div class="pd-step-desc">Give it a stir. Add 30 more seconds if needed.</div></div></div>
+            <div class="pd-step"><div class="pd-step-num">4</div><div class="pd-step-content"><span class="pd-step-visual"><svg width="28" height="28" style="color:var(--gold,#C9960C)"><use href="#ico-bowl"></use></svg></span><div class="pd-step-title">Serve Hot</div><div class="pd-step-desc">Enjoy with roti, naan, or steamed rice.</div></div></div>
+          </div>
+        </div>
+        <div class="pd-method-card">
+          <div class="pd-method-title">
+            <div class="pd-method-icon-wrap stovetop"><svg width="24" height="24" style="color:var(--gold,#C9960C)"><use href="#ico-flame"></use></svg></div>
+            <div><div class="pd-method-name">Stovetop / Hot Water</div><div class="pd-method-time">Ready in 3&ndash;5 minutes</div></div>
+          </div>
+          <div class="pd-steps">
+            <div class="pd-step"><div class="pd-step-num">1</div><div class="pd-step-content"><span class="pd-step-visual"><svg width="28" height="28" style="color:var(--royal,#1B2A6B)"><use href="#ico-jar"></use></svg></span><div class="pd-step-title">Keep Pouch Sealed</div><div class="pd-step-desc">Do not open the pouch before heating.</div></div></div>
+            <div class="pd-step"><div class="pd-step-num">2</div><div class="pd-step-content"><span class="pd-step-visual"><svg width="28" height="28" style="color:var(--gold,#C9960C)"><use href="#ico-flame"></use></svg></span><div class="pd-step-title">Boil Water</div><div class="pd-step-desc">Place sealed pouch in boiling water.</div></div></div>
+            <div class="pd-step"><div class="pd-step-num">3</div><div class="pd-step-content"><span class="pd-step-visual"><svg width="28" height="28" style="color:var(--royal,#1B2A6B)"><use href="#ico-timer"></use></svg></span><div class="pd-step-title">Heat for 3&ndash;5 Min</div><div class="pd-step-desc">Let it sit in hot water for 3&ndash;5 minutes.</div></div></div>
+            <div class="pd-step"><div class="pd-step-num">4</div><div class="pd-step-content"><span class="pd-step-visual"><svg width="28" height="28" style="color:var(--royal,#1B2A6B)"><use href="#ico-scissors"></use></svg></span><div class="pd-step-title">Open and Serve</div><div class="pd-step-desc">Carefully cut open and serve directly.</div></div></div>
+          </div>
+          <div class="pd-serve-tip">
+            <span class="pd-serve-tip-icon"><svg width="20" height="20" style="color:var(--gold,#C9960C)"><use href="#ico-bulb"></use></svg></span>
+            <div class="pd-serve-tip-text"><strong>Serving Tip:</strong> Best served hot with <strong>roti or rice</strong>. Garnish with fresh coriander.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pd-tab-panel" id="pdtab-shelf">
+      <div class="shelf-info">
+        <div class="shelf-row"><span class="shelf-icon"><svg width="20" height="20"><use href="#ico-calendar"></use></svg></span><div><div class="shelf-label">Best Before</div><div class="shelf-val">12 months from manufacture date</div></div></div>
+        <div class="shelf-row"><span class="shelf-icon"><svg width="20" height="20"><use href="#ico-thermo"></use></svg></span><div><div class="shelf-label">Storage</div><div class="shelf-val">Store in a cool, dry place away from direct sunlight.</div></div></div>
+        <div class="shelf-row"><span class="shelf-icon"><svg width="20" height="20"><use href="#ico-box"></use></svg></span><div><div class="shelf-label">Packaging</div><div class="shelf-val">Hygienic sealed pouch &mdash; no preservatives added</div></div></div>
+        <div class="shelf-row"><span class="shelf-icon"><svg width="20" height="20"><use href="#ico-shield"></use></svg></span><div><div class="shelf-label">Quality</div><div class="shelf-val">FSSAI certified. Tested for food safety standards.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pd-section pd-trust-section">
+    <div class="pd-trust-grid">
+      <div class="pd-trust-card"><div class="pd-trust-icon"><svg width="28" height="28" style="color:var(--gold-light,#E8B84B)"><use href="#ico-truck"></use></svg></div><div class="pd-trust-title">Delivery in 3&ndash;4 Days</div><div class="pd-trust-sub">Pan-India shipping</div></div>
+      <div class="pd-trust-card"><div class="pd-trust-icon"><svg width="28" height="28" style="color:var(--gold-light,#E8B84B)"><use href="#ico-shield"></use></svg></div><div class="pd-trust-title">Free Delivery</div><div class="pd-trust-sub">On orders above &#x20b9;500</div></div>
+      <div class="pd-trust-card"><div class="pd-trust-icon"><svg width="28" height="28" style="color:var(--gold-light,#E8B84B)"><use href="#ico-leaf"></use></svg></div><div class="pd-trust-title">Preservative-Free</div><div class="pd-trust-sub">No artificial additives</div></div>
+      <div class="pd-trust-card"><div class="pd-trust-icon"><svg width="28" height="28" style="color:var(--gold-light,#E8B84B)"><use href="#ico-chat"></use></svg></div><div class="pd-trust-title">24/7 Support</div><div class="pd-trust-sub">Always here to help</div></div>
+      <div class="pd-trust-card"><div class="pd-trust-icon"><svg width="28" height="28" style="color:var(--gold-light,#E8B84B)"><use href="#ico-lock"></use></svg></div><div class="pd-trust-title">Secure Payment</div><div class="pd-trust-sub">100% safe &amp; encrypted</div></div>
+      <div class="pd-trust-card"><div class="pd-trust-icon"><svg width="28" height="28" style="color:var(--gold-light,#E8B84B)"><use href="#ico-return"></use></svg></div><div class="pd-trust-title">Easy Returns</div><div class="pd-trust-sub">Hassle-free policy</div></div>
+    </div>
+  </div>
+
+  <div class="pd-section pd-related-section">
+    <div class="section-header" style="margin-bottom:36px">
+      <div class="section-eyebrow">You May Also Like</div>
+      <h2 class="section-title">Related <em>Products</em></h2>
+      <div class="section-ornament"><span class="section-ornament-line"></span><span class="section-ornament-diamond"></span><span class="section-ornament-line r"></span></div>
+    </div>
+    <div class="products-grid">
+      {% if product.collections.first %}
+        {% for rp in product.collections.first.products limit: 5 %}
+          {% unless rp.handle == product.handle %}
+            {% render 'product-card', product: rp %}
+          {% endunless %}
+        {% endfor %}
+      {% else %}
+        {% for rp in collections.all.products limit: 5 %}
+          {% unless rp.handle == product.handle %}
+            {% render 'product-card', product: rp %}
+          {% endunless %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% comment %}REVIEWS DATA{% endcomment %}
+{% assign r_rating = "4.5" %}{% assign r_count = "80+" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign r_rating = '4.9' %}{% assign r_count = '186' %}
+  {% when 'bateta' %}{% assign r_rating = '4.6' %}{% assign r_count = '143' %}
+  {% when 'bharela-bateta' %}{% assign r_rating = '4.4' %}{% assign r_count = '127' %}
+  {% when 'bharela-ringana' %}{% assign r_rating = '4.2' %}{% assign r_count = '98' %}
+  {% when 'gujrati-dal' %}{% assign r_rating = '4.8' %}{% assign r_count = '212' %}
+  {% when 'deshi-chana' %}{% assign r_rating = '4.5' %}{% assign r_count = '93' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign r_rating = '4.5' %}{% assign r_count = '108' %}
+  {% when 'methi-papad' %}{% assign r_rating = '4.3' %}{% assign r_count = '89' %}
+  {% when 'mag' %}{% assign r_rating = '4.4' %}{% assign r_count = '112' %}
+  {% when 'vaghareli-khichdi','vakhareli-khichadi' %}{% assign r_rating = '4.7' %}{% assign r_count = '178' %}
+  {% when 'kaju-butter-masala' %}{% assign r_rating = '4.9' %}{% assign r_count = '203' %}
+  {% when 'paneer-tikka','paneer-tikka-masala' %}{% assign r_rating = '4.7' %}{% assign r_count = '189' %}
+  {% when 'paneer-but-masala','paneer-butter-masala' %}{% assign r_rating = '4.9' %}{% assign r_count = '247' %}
+  {% when 'paneer-rajwadi' %}{% assign r_rating = '4.6' %}{% assign r_count = '134' %}
+  {% when 'mutter-paneer' %}{% assign r_rating = '4.7' %}{% assign r_count = '167' %}
+  {% when 'punjabi-chhole','punjabi-chole' %}{% assign r_rating = '4.8' %}{% assign r_count = '198' %}
+  {% when 'dal-taraka','dal-tadka' %}{% assign r_rating = '4.6' %}{% assign r_count = '156' %}
+  {% when 'pau-bhaji','pav-bhaji' %}{% assign r_rating = '4.8' %}{% assign r_count = '211' %}
+  {% when 'shahi-paneer' %}{% assign r_rating = '4.7' %}{% assign r_count = '156' %}
+  {% when 'palak-paneer' %}{% assign r_rating = '4.6' %}{% assign r_count = '172' %}
+{% endcase %}
+{% assign rv1_name = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv1_name = 'Meena P.' %}
+  {% when 'bateta' %}{% assign rv1_name = 'Jayshree K.' %}
+  {% when 'bharela-bateta' %}{% assign rv1_name = 'Sunita B.' %}
+  {% when 'bharela-ringana' %}{% assign rv1_name = 'Varsha N.' %}
+  {% when 'gujrati-dal' %}{% assign rv1_name = 'Mona J.' %}
+  {% when 'deshi-chana' %}{% assign rv1_name = 'Pallavi M.' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv1_name = 'Leela B.' %}
+  {% when 'methi-papad' %}{% assign rv1_name = 'Nita S.' %}
+  {% when 'mag' %}{% assign rv1_name = 'Dipti V.' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv1_name = 'Anjali S.' %}
+  {% when 'kaju-butter-masala' %}{% assign rv1_name = 'Pooja A.' %}
+  {% when 'paneer-tikka' %}{% assign rv1_name = 'Ritu S.' %}
+  {% when 'paneer-but-masala' %}{% assign rv1_name = 'Kavya R.' %}
+  {% when 'paneer-rajwadi' %}{% assign rv1_name = 'Shruti T.' %}
+  {% when 'mutter-paneer' %}{% assign rv1_name = 'Suman V.' %}
+  {% when 'punjabi-chhole' %}{% assign rv1_name = 'Gurpreet S.' %}
+  {% when 'dal-taraka' %}{% assign rv1_name = 'Nikhil S.' %}
+  {% when 'pau-bhaji' %}{% assign rv1_name = 'Shweta D.' %}
+  {% when 'shahi-paneer' %}{% assign rv1_name = 'Alka T.' %}
+  {% when 'palak-paneer' %}{% assign rv1_name = 'Sunita M.' %}
+{% endcase %}
+{% assign rv1_loc = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv1_loc = 'Surat' %}
+  {% when 'bateta' %}{% assign rv1_loc = 'Rajkot' %}
+  {% when 'bharela-bateta' %}{% assign rv1_loc = 'Surat' %}
+  {% when 'bharela-ringana' %}{% assign rv1_loc = 'Surat' %}
+  {% when 'gujrati-dal' %}{% assign rv1_loc = 'Nadiad' %}
+  {% when 'deshi-chana' %}{% assign rv1_loc = 'Mumbai' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv1_loc = 'Morbi' %}
+  {% when 'methi-papad' %}{% assign rv1_loc = 'Ahmedabad' %}
+  {% when 'mag' %}{% assign rv1_loc = 'Anand' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv1_loc = 'Gandhinagar' %}
+  {% when 'kaju-butter-masala' %}{% assign rv1_loc = 'Delhi' %}
+  {% when 'paneer-tikka' %}{% assign rv1_loc = 'Chandigarh' %}
+  {% when 'paneer-but-masala' %}{% assign rv1_loc = 'Bangalore' %}
+  {% when 'paneer-rajwadi' %}{% assign rv1_loc = 'Jaipur' %}
+  {% when 'mutter-paneer' %}{% assign rv1_loc = 'Delhi' %}
+  {% when 'punjabi-chhole' %}{% assign rv1_loc = 'Ludhiana' %}
+  {% when 'dal-taraka' %}{% assign rv1_loc = 'Pune' %}
+  {% when 'pau-bhaji' %}{% assign rv1_loc = 'Mumbai' %}
+  {% when 'shahi-paneer' %}{% assign rv1_loc = 'Jaipur' %}
+  {% when 'palak-paneer' %}{% assign rv1_loc = 'Chandigarh' %}
+{% endcase %}
+{% assign rv1_date = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv1_date = 'Jan 2026' %}
+  {% when 'bateta' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'bharela-bateta' %}{% assign rv1_date = 'Jan 2026' %}
+  {% when 'bharela-ringana' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'gujrati-dal' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'deshi-chana' %}{% assign rv1_date = 'Jan 2026' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'methi-papad' %}{% assign rv1_date = 'Jan 2026' %}
+  {% when 'mag' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'kaju-butter-masala' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'paneer-tikka' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'paneer-but-masala' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'paneer-rajwadi' %}{% assign rv1_date = 'Jan 2026' %}
+  {% when 'mutter-paneer' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'punjabi-chhole' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'dal-taraka' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'pau-bhaji' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'shahi-paneer' %}{% assign rv1_date = 'Feb 2026' %}
+  {% when 'palak-paneer' %}{% assign rv1_date = 'Jan 2026' %}
+{% endcase %}
+{% assign rv1_star = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv1_star = '5' %}
+  {% when 'bateta' %}{% assign rv1_star = '5' %}
+  {% when 'bharela-bateta' %}{% assign rv1_star = '5' %}
+  {% when 'bharela-ringana' %}{% assign rv1_star = '5' %}
+  {% when 'gujrati-dal' %}{% assign rv1_star = '5' %}
+  {% when 'deshi-chana' %}{% assign rv1_star = '5' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv1_star = '5' %}
+  {% when 'methi-papad' %}{% assign rv1_star = '5' %}
+  {% when 'mag' %}{% assign rv1_star = '5' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv1_star = '5' %}
+  {% when 'kaju-butter-masala' %}{% assign rv1_star = '5' %}
+  {% when 'paneer-tikka' %}{% assign rv1_star = '5' %}
+  {% when 'paneer-but-masala' %}{% assign rv1_star = '5' %}
+  {% when 'paneer-rajwadi' %}{% assign rv1_star = '5' %}
+  {% when 'mutter-paneer' %}{% assign rv1_star = '5' %}
+  {% when 'punjabi-chhole' %}{% assign rv1_star = '5' %}
+  {% when 'dal-taraka' %}{% assign rv1_star = '5' %}
+  {% when 'pau-bhaji' %}{% assign rv1_star = '5' %}
+  {% when 'shahi-paneer' %}{% assign rv1_star = '5' %}
+  {% when 'palak-paneer' %}{% assign rv1_star = '5' %}
+{% endcase %}
+{% assign rv1_text = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv1_text = 'Exactly like my mum used to make for Uttarayan. The surti papdi and raw banana are perfectly cooked — not mushy at all. Reheated in 3 minutes and tasted fresh. Ordered 6 pouches!' %}
+  {% when 'bateta' %}{% assign rv1_text = 'The masala coating on the potatoes is spot on — not too dry, not too wet. Exactly the way Kathiyawadi bateta should be. Perfect with dal-rice or just roti.' %}
+  {% when 'bharela-bateta' %}{% assign rv1_text = 'The stuffing inside the potatoes has a lovely peanut-coconut flavour. It does not fall apart when heated — potatoes hold their shape perfectly. Tastes exactly like the ones my grandmother makes.' %}
+  {% when 'bharela-ringana' %}{% assign rv1_text = 'Bharela ringana is my absolute favourite Gujarati dish and this one does not disappoint. The brinjals are soft inside, the stuffing has a perfect balance of peanut, sesame and spices.' %}
+  {% when 'gujrati-dal' %}{% assign rv1_text = 'The perfect balance of sweet, sour and spicy — exactly how Gujarati dal should taste. The jaggery and tamarind combination is subtle and not overdone. Had it with rice and ghee. Pure comfort food.' %}
+  {% when 'deshi-chana' %}{% assign rv1_text = 'The black chana are perfectly cooked — firm bite, not mushy. The masala is robust with whole spices and you can tell it has been slow-cooked. Had it with puris for Sunday breakfast. Loved it!' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv1_text = 'This kadhi has the bold, spicy Kathiyawadi character — not the mild sweet Gujarati version. The buttermilk base is thick and the ginger-chilli flavour is prominent. Had it with khichdi. Absolutely perfect.' %}
+  {% when 'methi-papad' %}{% assign rv1_text = 'Methi papad is a very unique dish and this one has got it right. The slight bitterness of fenugreek is balanced by the tomato and spice tadka. Crispy texture even after heating. Loved it as a snack!' %}
+  {% when 'mag' %}{% assign rv1_text = 'Light, wholesome and incredibly flavourful. The whole moong are cooked perfectly and the garlic-tomato masala is simple but delicious. This is now my regular Tuesday lunch. Ordered 8 pouches.' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv1_text = 'The ultimate comfort food done right. Soft, well-seasoned and the tadka of mustard, cumin and curry leaves is fragrant. I top it with a spoon of ghee and it is absolutely divine. My family s favourite.' %}
+  {% when 'kaju-butter-masala' %}{% assign rv1_text = 'This is genuinely restaurant quality. The cashews are plump, the gravy is rich and creamy, and the spice balance is perfect. My husband thought I had ordered from a restaurant. Absolutely delicious with naan!' %}
+  {% when 'paneer-tikka' %}{% assign rv1_text = 'The smoky tikka masala flavour is exactly what you get at a good restaurant. Paneer is soft and the capsicum gives a nice crunch. Heated in microwave for 3 minutes and it was perfect. Genuinely impressive.' %}
+  {% when 'paneer-but-masala' %}{% assign rv1_text = 'This is my go-to paneer butter masala now. The gravy is silky smooth, mildly sweet and perfectly spiced. The paneer is soft and absorbs the sauce beautifully. Better than most restaurant versions I have tried!' %}
+  {% when 'paneer-rajwadi' %}{% assign rv1_text = 'The royal spice blend in this paneer dish is something else entirely. You can taste the whole spices — cardamom, clove, cinnamon — in every bite. Richer and more aromatic than regular paneer dishes. Felt like a special occasion meal.' %}
+  {% when 'mutter-paneer' %}{% assign rv1_text = 'The green peas are sweet and not overcooked — that is the mark of good mutter paneer. The tomato gravy is well-balanced and not too heavy. My kids had it with rice and finished everything. Will order again!' %}
+  {% when 'punjabi-chhole' %}{% assign rv1_text = 'As a Punjabi I am very picky about my chole and this genuinely delivered. Dark gravy, bold spicing, proper use of dried mango powder — it has the authentic Punjabi character. Perfect with bhature or kulcha!' %}
+  {% when 'dal-taraka' %}{% assign rv1_text = 'The smoky butter-ghee tadka is what makes this dal special. You can smell the cumin and garlic the moment you open the pouch. Tastes exactly like the dal tadka at a good dhaba. My office lunch staple now.' %}
+  {% when 'pau-bhaji' %}{% assign rv1_text = 'Being from Mumbai I had high expectations and this pav bhaji met all of them. The bhaji is thick, buttery and has the right colour. The street-food style spice level is spot on. Just add butter and toasted pav — perfection!' %}
+  {% when 'shahi-paneer' %}{% assign rv1_text = 'The saffron aroma when you open the pouch is something else. The gravy is rich, mildly sweet and has a beautiful golden colour. Paneer is soft and fresh-tasting. Genuinely shahi — worthy of a special occasion dinner.' %}
+  {% when 'palak-paneer' %}{% assign rv1_text = 'The spinach is fresh-tasting and properly pureed — not stringy or overcooked. The paneer cubes are a good size and the ginger-garlic base is well-balanced. My daughter who usually avoids palak had two servings!' %}
+{% endcase %}
+{% assign rv2_name = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv2_name = 'Rakesh S.' %}
+  {% when 'bateta' %}{% assign rv2_name = 'Nilesh M.' %}
+  {% when 'bharela-bateta' %}{% assign rv2_name = 'Amit T.' %}
+  {% when 'bharela-ringana' %}{% assign rv2_name = 'Dinesh P.' %}
+  {% when 'gujrati-dal' %}{% assign rv2_name = 'Krunal S.' %}
+  {% when 'deshi-chana' %}{% assign rv2_name = 'Suresh K.' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv2_name = 'Rahul T.' %}
+  {% when 'methi-papad' %}{% assign rv2_name = 'Vikas R.' %}
+  {% when 'mag' %}{% assign rv2_name = 'Manish P.' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv2_name = 'Ravi M.' %}
+  {% when 'kaju-butter-masala' %}{% assign rv2_name = 'Sanjay K.' %}
+  {% when 'paneer-tikka' %}{% assign rv2_name = 'Arun P.' %}
+  {% when 'paneer-but-masala' %}{% assign rv2_name = 'Mohit S.' %}
+  {% when 'paneer-rajwadi' %}{% assign rv2_name = 'Vipin M.' %}
+  {% when 'mutter-paneer' %}{% assign rv2_name = 'Rohit B.' %}
+  {% when 'punjabi-chhole' %}{% assign rv2_name = 'Ajay K.' %}
+  {% when 'dal-taraka' %}{% assign rv2_name = 'Asha R.' %}
+  {% when 'pau-bhaji' %}{% assign rv2_name = 'Karan M.' %}
+  {% when 'shahi-paneer' %}{% assign rv2_name = 'Sameer V.' %}
+  {% when 'palak-paneer' %}{% assign rv2_name = 'Arvind K.' %}
+{% endcase %}
+{% assign rv2_loc = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv2_loc = 'Mumbai' %}
+  {% when 'bateta' %}{% assign rv2_loc = 'Baroda' %}
+  {% when 'bharela-bateta' %}{% assign rv2_loc = 'Mumbai' %}
+  {% when 'bharela-ringana' %}{% assign rv2_loc = 'Ahmedabad' %}
+  {% when 'gujrati-dal' %}{% assign rv2_loc = 'Dubai' %}
+  {% when 'deshi-chana' %}{% assign rv2_loc = 'Rajkot' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv2_loc = 'Pune' %}
+  {% when 'methi-papad' %}{% assign rv2_loc = 'Rajkot' %}
+  {% when 'mag' %}{% assign rv2_loc = 'Mumbai' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv2_loc = 'Bangalore' %}
+  {% when 'kaju-butter-masala' %}{% assign rv2_loc = 'Mumbai' %}
+  {% when 'paneer-tikka' %}{% assign rv2_loc = 'Hyderabad' %}
+  {% when 'paneer-but-masala' %}{% assign rv2_loc = 'Noida' %}
+  {% when 'paneer-rajwadi' %}{% assign rv2_loc = 'Mumbai' %}
+  {% when 'mutter-paneer' %}{% assign rv2_loc = 'Lucknow' %}
+  {% when 'punjabi-chhole' %}{% assign rv2_loc = 'Mumbai' %}
+  {% when 'dal-taraka' %}{% assign rv2_loc = 'Nagpur' %}
+  {% when 'pau-bhaji' %}{% assign rv2_loc = 'Delhi' %}
+  {% when 'shahi-paneer' %}{% assign rv2_loc = 'Mumbai' %}
+  {% when 'palak-paneer' %}{% assign rv2_loc = 'Hyderabad' %}
+{% endcase %}
+{% assign rv2_date = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv2_date = 'Dec 2025' %}
+  {% when 'bateta' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'bharela-bateta' %}{% assign rv2_date = 'Dec 2025' %}
+  {% when 'bharela-ringana' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'gujrati-dal' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'deshi-chana' %}{% assign rv2_date = 'Dec 2025' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'methi-papad' %}{% assign rv2_date = 'Dec 2025' %}
+  {% when 'mag' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'kaju-butter-masala' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'paneer-tikka' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'paneer-but-masala' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'paneer-rajwadi' %}{% assign rv2_date = 'Dec 2025' %}
+  {% when 'mutter-paneer' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'punjabi-chhole' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'dal-taraka' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'pau-bhaji' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'shahi-paneer' %}{% assign rv2_date = 'Jan 2026' %}
+  {% when 'palak-paneer' %}{% assign rv2_date = 'Dec 2025' %}
+{% endcase %}
+{% assign rv2_star = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv2_star = '5' %}
+  {% when 'bateta' %}{% assign rv2_star = '5' %}
+  {% when 'bharela-bateta' %}{% assign rv2_star = '5' %}
+  {% when 'bharela-ringana' %}{% assign rv2_star = '4' %}
+  {% when 'gujrati-dal' %}{% assign rv2_star = '5' %}
+  {% when 'deshi-chana' %}{% assign rv2_star = '5' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv2_star = '5' %}
+  {% when 'methi-papad' %}{% assign rv2_star = '4' %}
+  {% when 'mag' %}{% assign rv2_star = '5' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv2_star = '5' %}
+  {% when 'kaju-butter-masala' %}{% assign rv2_star = '5' %}
+  {% when 'paneer-tikka' %}{% assign rv2_star = '5' %}
+  {% when 'paneer-but-masala' %}{% assign rv2_star = '5' %}
+  {% when 'paneer-rajwadi' %}{% assign rv2_star = '5' %}
+  {% when 'mutter-paneer' %}{% assign rv2_star = '5' %}
+  {% when 'punjabi-chhole' %}{% assign rv2_star = '5' %}
+  {% when 'dal-taraka' %}{% assign rv2_star = '5' %}
+  {% when 'pau-bhaji' %}{% assign rv2_star = '5' %}
+  {% when 'shahi-paneer' %}{% assign rv2_star = '5' %}
+  {% when 'palak-paneer' %}{% assign rv2_star = '5' %}
+{% endcase %}
+{% assign rv2_text = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv2_text = 'I was sceptical about ready-to-eat undhiyu but this genuinely surprised me. Rich coconut-spice gravy, and you can tell it is made with real groundnut oil. No artificial smell whatsoever.' %}
+  {% when 'bateta' %}{% assign rv2_text = 'Ordered for my hostel room in Pune. Heated in microwave for 2 minutes and it tasted like home. The mustard-cumin tadka flavour comes through clearly. Great value.' %}
+  {% when 'bharela-bateta' %}{% assign rv2_text = 'Was not expecting such a good texture from a ready-to-eat product. The masala stuffing is generous and well-spiced. Had it with bajra rotla — absolutely delicious combination.' %}
+  {% when 'bharela-ringana' %}{% assign rv2_text = 'Really good taste — earthy and slightly smoky the way bharela ringana should be. Heated in boiling water in the pouch and it was perfect. Genuine homestyle flavour.' %}
+  {% when 'gujrati-dal' %}{% assign rv2_text = 'I am a Gujarati living abroad and this dal genuinely tastes like home. The tadka with mustard seeds and curry leaves comes through clearly. Ordered 12 pouches for the whole month!' %}
+  {% when 'deshi-chana' %}{% assign rv2_text = 'Good thick masala and well-spiced. The chana have absorbed the flavours beautifully. This is my go-to quick lunch now — heat and eat in 3 minutes with bread or roti. Genuinely tasty.' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv2_text = 'I have tried many ready-to-eat kadhis and this is by far the most authentic. You can taste the real buttermilk and the tadka is aromatic. No artificial sourness. Genuinely impressed.' %}
+  {% when 'methi-papad' %}{% assign rv2_text = 'Interesting combination that works really well. The papad retains some crunch and the masala is flavourful. Good for snacking or as a side with dal-rice. Something different and delicious.' %}
+  {% when 'mag' %}{% assign rv2_text = 'I needed something healthy and easy to make at work. This mug masala heats in 2 minutes and tastes genuinely home-cooked. The buttermilk gives it a lovely slight tanginess. Highly recommend!' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv2_text = 'Being a Gujarati in Bangalore, this khichdi is my go-to comfort meal. Heats perfectly in the pouch with hot water in 4 minutes. Tastes exactly like mum s recipe. Cannot believe it is ready-to-eat!' %}
+  {% when 'kaju-butter-masala' %}{% assign rv2_text = 'The best ready-to-eat I have tried. The cashews are whole and generous, the gravy has real depth of flavour. No artificial taste at all. Worth every rupee. Will order every month.' %}
+  {% when 'paneer-tikka' %}{% assign rv2_text = 'Bold, flavourful and the right amount of heat. The tomato-cream base is rich without being too heavy. Had it with tandoori roti and it was a full restaurant experience at home. Will definitely reorder!' %}
+  {% when 'paneer-but-masala' %}{% assign rv2_text = 'Outstanding. The butter flavour comes through clearly and the tomato base has real depth. Heated in 3 minutes and tasted freshly made. My entire family loved it. Already on my monthly subscription list.' %}
+  {% when 'paneer-rajwadi' %}{% assign rv2_text = 'Made this for guests and they asked where I ordered the food from — they could not believe it was a ready-to-eat pouch. The saffron-infused gravy is incredible. Highly recommend for special dinners.' %}
+  {% when 'mutter-paneer' %}{% assign rv2_text = 'Classic, comforting and genuinely tasty. The portion size is generous and both the paneer and mutter are cooked just right. This is now my standard weeknight dinner option. Excellent product.' %}
+  {% when 'punjabi-chhole' %}{% assign rv2_text = 'The depth of flavour in this chole is remarkable for a ready-to-eat product. You can taste the whole spices and the slow-cooked richness. Had it for Saturday breakfast with bhature. Absolutely loved it.' %}
+  {% when 'dal-taraka' %}{% assign rv2_text = 'Really good everyday dal. The right consistency, well-balanced spices and that charred tadka flavour everyone loves. Had it with jeera rice for dinner — simple but incredibly satisfying. Already reordered.' %}
+  {% when 'pau-bhaji' %}{% assign rv2_text = 'Outstanding street-food taste without stepping outside. The mixed vegetable mash is smooth and the spice blend is exactly right. This is easily the best ready-to-eat pav bhaji I have tried. Ordering in bulk!' %}
+  {% when 'shahi-paneer' %}{% assign rv2_text = 'Made this for a dinner party and my guests were thoroughly impressed. The nut-based gravy is silky and the whole spices give it elegance. Nobody believed it was ready-to-eat. Incredible product.' %}
+  {% when 'palak-paneer' %}{% assign rv2_text = 'Very fresh, nutritious and genuinely delicious. The earthy spinach flavour is complemented by mild spicing and the cream gives it a nice richness. This is one of the healthiest ready-to-eat options I have found.' %}
+{% endcase %}
+{% assign rv3_name = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv3_name = 'Hetal V.' %}
+  {% when 'bateta' %}{% assign rv3_name = 'Priya R.' %}
+  {% when 'bharela-bateta' %}{% assign rv3_name = 'Kavita D.' %}
+  {% when 'bharela-ringana' %}{% assign rv3_name = 'Rupa S.' %}
+  {% when 'gujrati-dal' %}{% assign rv3_name = 'Bhavna R.' %}
+  {% when 'deshi-chana' %}{% assign rv3_name = 'Asha V.' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv3_name = 'Geeta P.' %}
+  {% when 'methi-papad' %}{% assign rv3_name = 'Smita K.' %}
+  {% when 'mag' %}{% assign rv3_name = 'Rashmi N.' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv3_name = 'Komal T.' %}
+  {% when 'kaju-butter-masala' %}{% assign rv3_name = 'Neha G.' %}
+  {% when 'paneer-tikka' %}{% assign rv3_name = 'Swati M.' %}
+  {% when 'paneer-but-masala' %}{% assign rv3_name = 'Deepa K.' %}
+  {% when 'paneer-rajwadi' %}{% assign rv3_name = 'Anita J.' %}
+  {% when 'mutter-paneer' %}{% assign rv3_name = 'Meera P.' %}
+  {% when 'punjabi-chhole' %}{% assign rv3_name = 'Preethi M.' %}
+  {% when 'dal-taraka' %}{% assign rv3_name = 'Tarun P.' %}
+  {% when 'pau-bhaji' %}{% assign rv3_name = 'Nandini K.' %}
+  {% when 'shahi-paneer' %}{% assign rv3_name = 'Rekha S.' %}
+  {% when 'palak-paneer' %}{% assign rv3_name = 'Priya N.' %}
+{% endcase %}
+{% assign rv3_loc = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv3_loc = 'Ahmedabad' %}
+  {% when 'bateta' %}{% assign rv3_loc = 'Pune' %}
+  {% when 'bharela-bateta' %}{% assign rv3_loc = 'Anand' %}
+  {% when 'bharela-ringana' %}{% assign rv3_loc = 'Rajkot' %}
+  {% when 'gujrati-dal' %}{% assign rv3_loc = 'Baroda' %}
+  {% when 'deshi-chana' %}{% assign rv3_loc = 'Ahmedabad' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv3_loc = 'Surat' %}
+  {% when 'methi-papad' %}{% assign rv3_loc = 'Baroda' %}
+  {% when 'mag' %}{% assign rv3_loc = 'Surat' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv3_loc = 'Ahmedabad' %}
+  {% when 'kaju-butter-masala' %}{% assign rv3_loc = 'Pune' %}
+  {% when 'paneer-tikka' %}{% assign rv3_loc = 'Mumbai' %}
+  {% when 'paneer-but-masala' %}{% assign rv3_loc = 'Chennai' %}
+  {% when 'paneer-rajwadi' %}{% assign rv3_loc = 'Pune' %}
+  {% when 'mutter-paneer' %}{% assign rv3_loc = 'Ahmedabad' %}
+  {% when 'punjabi-chhole' %}{% assign rv3_loc = 'Hyderabad' %}
+  {% when 'dal-taraka' %}{% assign rv3_loc = 'Indore' %}
+  {% when 'pau-bhaji' %}{% assign rv3_loc = 'Bangalore' %}
+  {% when 'shahi-paneer' %}{% assign rv3_loc = 'Bhopal' %}
+  {% when 'palak-paneer' %}{% assign rv3_loc = 'Pune' %}
+{% endcase %}
+{% assign rv3_date = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv3_date = 'Nov 2025' %}
+  {% when 'bateta' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'bharela-bateta' %}{% assign rv3_date = 'Nov 2025' %}
+  {% when 'bharela-ringana' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'gujrati-dal' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'deshi-chana' %}{% assign rv3_date = 'Nov 2025' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'methi-papad' %}{% assign rv3_date = 'Nov 2025' %}
+  {% when 'mag' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'kaju-butter-masala' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'paneer-tikka' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'paneer-but-masala' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'paneer-rajwadi' %}{% assign rv3_date = 'Nov 2025' %}
+  {% when 'mutter-paneer' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'punjabi-chhole' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'dal-taraka' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'pau-bhaji' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'shahi-paneer' %}{% assign rv3_date = 'Dec 2025' %}
+  {% when 'palak-paneer' %}{% assign rv3_date = 'Nov 2025' %}
+{% endcase %}
+{% assign rv3_star = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv3_star = '4' %}
+  {% when 'bateta' %}{% assign rv3_star = '4' %}
+  {% when 'bharela-bateta' %}{% assign rv3_star = '4' %}
+  {% when 'bharela-ringana' %}{% assign rv3_star = '5' %}
+  {% when 'gujrati-dal' %}{% assign rv3_star = '4' %}
+  {% when 'deshi-chana' %}{% assign rv3_star = '4' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv3_star = '4' %}
+  {% when 'methi-papad' %}{% assign rv3_star = '5' %}
+  {% when 'mag' %}{% assign rv3_star = '4' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv3_star = '4' %}
+  {% when 'kaju-butter-masala' %}{% assign rv3_star = '4' %}
+  {% when 'paneer-tikka' %}{% assign rv3_star = '4' %}
+  {% when 'paneer-but-masala' %}{% assign rv3_star = '4' %}
+  {% when 'paneer-rajwadi' %}{% assign rv3_star = '4' %}
+  {% when 'mutter-paneer' %}{% assign rv3_star = '4' %}
+  {% when 'punjabi-chhole' %}{% assign rv3_star = '4' %}
+  {% when 'dal-taraka' %}{% assign rv3_star = '4' %}
+  {% when 'pau-bhaji' %}{% assign rv3_star = '4' %}
+  {% when 'shahi-paneer' %}{% assign rv3_star = '4' %}
+  {% when 'palak-paneer' %}{% assign rv3_star = '4' %}
+{% endcase %}
+{% assign rv3_text = "" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign rv3_text = 'Very authentic taste. I added a bit of fresh coriander on top and it tasted homemade. The portion size is good for 2 people with rotli. Will definitely reorder.' %}
+  {% when 'bateta' %}{% assign rv3_text = 'Good flavour and well-spiced. I like that it is not too oily. Slightly less spicy than I prefer but I added green chilli and it was perfect. Good for everyday meals.' %}
+  {% when 'bharela-bateta' %}{% assign rv3_text = 'Good authentic taste. The portion is perfect for two. I would have liked slightly more gravy but the dry style is also nice with puri. Will order again.' %}
+  {% when 'bharela-ringana' %}{% assign rv3_text = 'Ordered this along with undhiyu and both were excellent. The brinjal texture is just right — not overcooked. The masala stuffing is the highlight. Highly recommend.' %}
+  {% when 'gujrati-dal' %}{% assign rv3_text = 'Very good flavour and just the right consistency. Not too thick, not too thin. The dried dates give a unique sweetness that sets it apart. Will order again.' %}
+  {% when 'deshi-chana' %}{% assign rv3_text = 'Authentic taste with a nice spice level. I liked that it was not overly salty. Added a squeeze of lemon on top and it tasted even better. Good value for money.' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign rv3_text = 'Good thickness and nice tangy flavour. A bit spicier than regular Gujarati kadhi which I actually prefer. Goes well with both rice and khichdi. Will order more.' %}
+  {% when 'methi-papad' %}{% assign rv3_text = 'My family is from Saurashtra and methi papad is a traditional favourite. This one tastes exactly how I remember it from my childhood. The groundnut oil flavour is authentic. Very happy with this purchase.' %}
+  {% when 'mag' %}{% assign rv3_text = 'Very good everyday dal. Light on the stomach and well-spiced. The coconut powder gives it a nice depth. Tastes best with rice and a spoon of ghee. Good value too at this price.' %}
+  {% when 'vaghareli-khichdi' %}{% assign rv3_text = 'Good soft texture and nice mild spicing. The moong dal and rice ratio is perfect. A bit more salt would suit my taste but overall very good. Great for a quick healthy dinner.' %}
+  {% when 'kaju-butter-masala' %}{% assign rv3_text = 'Very tasty and rich gravy. A bit sweeter than I prefer but the cashews are perfectly cooked and the quantity is generous. Great with jeera rice. Would buy again.' %}
+  {% when 'paneer-tikka' %}{% assign rv3_text = 'Good flavour and generous paneer pieces. The tikka masala spice is authentic. Slightly less spicy than I prefer but overall very satisfying. Great for a quick dinner when you do not want to cook.' %}
+  {% when 'paneer-but-masala' %}{% assign rv3_text = 'Very rich and flavourful. The paneer pieces are a good size and the gravy is thick. I would have liked it slightly less sweet but overall it is very good. Best paired with butter naan.' %}
+  {% when 'paneer-rajwadi' %}{% assign rv3_text = 'Very premium taste with complex spice notes. The paneer is good quality and the gravy is thick and rich. A step above regular paneer butter masala. Worth the slightly higher price.' %}
+  {% when 'mutter-paneer' %}{% assign rv3_text = 'Good home-style flavour. The gravy is medium-thick and the spicing is mild enough for kids. Had it with both roti and rice and it worked well with both. Good consistent quality across orders.' %}
+  {% when 'punjabi-chhole' %}{% assign rv3_text = 'Bold and very flavourful. Slightly on the spicier side which I enjoyed. The chickpeas are perfectly cooked — firm but not hard. Great value compared to restaurant prices.' %}
+  {% when 'dal-taraka' %}{% assign rv3_text = 'Solid dal tadka. The dried red chilli in the tadka gives a nice heat. Could use slightly more ghee but the overall flavour is authentic dhaba style. Very good value for money.' %}
+  {% when 'pau-bhaji' %}{% assign rv3_text = 'Really good pav bhaji flavour. The consistency is perfect — not too thin or too thick. A touch more butter would make it even better but the base flavour is excellent. Kids loved it too!' %}
+  {% when 'shahi-paneer' %}{% assign rv3_text = 'Very rich and indulgent taste. The cashew and cream gravy is luxurious. Pairs beautifully with naan or biryani rice. Slightly sweet for my palate but the flavour is undeniably premium.' %}
+  {% when 'palak-paneer' %}{% assign rv3_text = 'Good consistent flavour across multiple orders. The spinach puree is smooth and the paneer quality is reliable. Tastes best with roti or lachha paratha. My go-to healthy weeknight dinner option.' %}
+{% endcase %}
+
+<div class="pd-reviews-section">
+  <div class="section-header" style="margin-bottom:24px">
+    <div class="section-eyebrow">What Our Customers Say</div>
+    <h2 class="section-title">Customer <em>Reviews</em></h2>
+    <div class="section-ornament"><span class="section-ornament-line"></span><span class="section-ornament-diamond"></span><span class="section-ornament-line r"></span></div>
+  </div>
+
+  <!-- Summary bar -->
+  <div class="pdr-summary">
+    <div class="pdr-big-score">
+      <div class="pdr-score-num">{{ r_rating }}</div>
+      <div class="pdr-score-stars" style="color:var(--gold,#C9960C);font-size:1.1rem;">★★★★★</div>
+      <div class="pdr-score-count">{{ r_count }} verified reviews</div>
+    </div>
+    <div class="pdr-bars">
+      <div class="pdr-bar-row"><span class="pdr-bar-label">5★</span><div class="pdr-bar-track"><div class="pdr-bar-fill" style="width:78%"></div></div><span class="pdr-bar-pct">78%</span></div>
+      <div class="pdr-bar-row"><span class="pdr-bar-label">4★</span><div class="pdr-bar-track"><div class="pdr-bar-fill" style="width:15%"></div></div><span class="pdr-bar-pct">15%</span></div>
+      <div class="pdr-bar-row"><span class="pdr-bar-label">3★</span><div class="pdr-bar-track"><div class="pdr-bar-fill" style="width:5%"></div></div><span class="pdr-bar-pct">5%</span></div>
+      <div class="pdr-bar-row"><span class="pdr-bar-label">2★</span><div class="pdr-bar-track"><div class="pdr-bar-fill" style="width:1%"></div></div><span class="pdr-bar-pct">1%</span></div>
+      <div class="pdr-bar-row"><span class="pdr-bar-label">1★</span><div class="pdr-bar-track"><div class="pdr-bar-fill" style="width:1%"></div></div><span class="pdr-bar-pct">1%</span></div>
+    </div>
+  </div>
+
+  <!-- Review Cards -->
+  <div class="pdr-list">
+
+    {% assign pdr_colors = "#1B2A6B,#C9960C,#2D6A4F" | split: "," %}
+
+    <div class="pdr-card">
+      <div class="pdr-card-header">
+        <div class="pdr-avatar" style="background:{{ pdr_colors[0] }};">{{ rv1_name | slice: 0 }}{{ rv1_name | split: ' ' | last | slice: 0 }}</div>
+        <div class="pdr-reviewer-info">
+          <div class="pdr-reviewer-name">{{ rv1_name }}</div>
+          <div class="pdr-reviewer-meta">
+            <span class="pdr-verified">&#10003; Verified Purchase</span>
+            <span class="pdr-dot">&middot;</span>
+            <span class="pdr-loc">{{ rv1_loc }}</span>
+            <span class="pdr-dot">&middot;</span>
+            <span class="pdr-date">{{ rv1_date }}</span>
+          </div>
+        </div>
+        <div class="pdr-card-stars" style="color:var(--gold,#C9960C);">
+          {% if rv1_star == '5' %}★★★★★{% else %}★★★★☆{% endif %}
+        </div>
+      </div>
+      <p class="pdr-text">&ldquo;{{ rv1_text }}&rdquo;</p>
+    </div>
+
+    <div class="pdr-card">
+      <div class="pdr-card-header">
+        <div class="pdr-avatar" style="background:{{ pdr_colors[1] }};">{{ rv2_name | slice: 0 }}{{ rv2_name | split: ' ' | last | slice: 0 }}</div>
+        <div class="pdr-reviewer-info">
+          <div class="pdr-reviewer-name">{{ rv2_name }}</div>
+          <div class="pdr-reviewer-meta">
+            <span class="pdr-verified">&#10003; Verified Purchase</span>
+            <span class="pdr-dot">&middot;</span>
+            <span class="pdr-loc">{{ rv2_loc }}</span>
+            <span class="pdr-dot">&middot;</span>
+            <span class="pdr-date">{{ rv2_date }}</span>
+          </div>
+        </div>
+        <div class="pdr-card-stars" style="color:var(--gold,#C9960C);">
+          {% if rv2_star == '5' %}★★★★★{% else %}★★★★☆{% endif %}
+        </div>
+      </div>
+      <p class="pdr-text">&ldquo;{{ rv2_text }}&rdquo;</p>
+    </div>
+
+    <div class="pdr-card">
+      <div class="pdr-card-header">
+        <div class="pdr-avatar" style="background:{{ pdr_colors[2] }};">{{ rv3_name | slice: 0 }}{{ rv3_name | split: ' ' | last | slice: 0 }}</div>
+        <div class="pdr-reviewer-info">
+          <div class="pdr-reviewer-name">{{ rv3_name }}</div>
+          <div class="pdr-reviewer-meta">
+            <span class="pdr-verified">&#10003; Verified Purchase</span>
+            <span class="pdr-dot">&middot;</span>
+            <span class="pdr-loc">{{ rv3_loc }}</span>
+            <span class="pdr-dot">&middot;</span>
+            <span class="pdr-date">{{ rv3_date }}</span>
+          </div>
+        </div>
+        <div class="pdr-card-stars" style="color:var(--gold,#C9960C);">
+          {% if rv3_star == '5' %}★★★★★{% else %}★★★★☆{% endif %}
+        </div>
+      </div>
+      <p class="pdr-text">&ldquo;{{ rv3_text }}&rdquo;</p>
+    </div>
+
+  </div>
+</div>
+
+{% render 'review-modal' %}
+
+<script>
+(function(){
+  var mainBtn = document.querySelector('#product-form-main .detail-add-cart-btn');
+  var stickyBar = document.getElementById('sticky-atc');
+  var stickyPrice = document.querySelector('#sticky-atc .sticky-atc-price');
+
+  // Hide native variant select if present
+  var nativeSel = document.querySelector('select[name="id"]');
+  if(nativeSel) nativeSel.style.display = 'none';
+
+  // Sync hidden input to the initially-active pack-btn on page load
+  var activePackBtn = document.querySelector('.pack-btn.active');
+  if(activePackBtn){
+    var hiddenIdInit = document.querySelector('#product-form-main [name="id"]');
+    if(hiddenIdInit) hiddenIdInit.value = activePackBtn.dataset.variantId;
+    if(stickyPrice) stickyPrice.textContent = activePackBtn.dataset.price;
+  }
+
+  // .pack-btn variant selection
+  document.querySelectorAll('.pack-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.pack-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var vid = btn.dataset.variantId;
+      var hiddenId = document.querySelector('#product-form-main [name="id"]');
+      if(hiddenId && vid) hiddenId.value = vid;
+      var price = btn.dataset.price;
+      if(price){
+        var pagePrice = document.querySelector('.product-detail-new');
+        if(pagePrice) pagePrice.textContent = price;
+        if(stickyPrice) stickyPrice.textContent = price;
+      }
+    });
+  });
+
+  // IntersectionObserver: show sticky when main ATC scrolls out of view
+  if(mainBtn && stickyBar){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        stickyBar.classList.toggle('visible', !e.isIntersecting);
+      });
+    }, {threshold: 0}).observe(mainBtn);
+  }
+
+  // sticky-atc-btn triggers main add button
+  var stickyBtn = document.querySelector('.sticky-atc-btn');
+  if(stickyBtn && mainBtn){
+    stickyBtn.addEventListener('click', function(){ mainBtn.click(); });
+  }
+})();
+</script>
+
+{% schema %}
+{"name": "Product Page", "settings": [], "presets": [{"name": "Product Page"}]}
+{% endschema %}

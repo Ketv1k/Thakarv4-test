@@ -1,0 +1,31 @@
+<div class="promo-banner" style="margin:0 8% 90px">
+  <div>
+    <div class="promo-eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2 class="promo-title">{{ section.settings.heading }}</h2>
+    <p class="promo-desc">{{ section.settings.desc }}</p>
+    <a href="{{ section.settings.btn_link | default: '/collections/all' }}" class="btn-royal" style="margin-top:28px;display:inline-block">
+      {{ section.settings.btn_text }}
+    </a>
+  </div>
+  <div class="promo-code-box">
+    <div class="promo-code-label">Use Code</div>
+    <div class="promo-code-value">{{ section.settings.code }}</div>
+    <div class="promo-code-save">{{ section.settings.code_desc }}</div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Promo Banner",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "\u2726 Limited Time Offer" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "First Order? Save 10% Today" },
+    { "type": "textarea", "id": "desc", "label": "Description", "default": "Sign up and get exclusive access to our newest dishes and seasonal specials." },
+    { "type": "text", "id": "btn_text", "label": "Button Text", "default": "Claim Discount" },
+    { "type": "url", "id": "btn_link", "label": "Button Link" },
+    { "type": "text", "id": "code", "label": "Coupon Code", "default": "THAKAR10" },
+    { "type": "text", "id": "code_desc", "label": "Code Description", "default": "Save \u20b920\u2013\u20b925 on first order" }
+  ],
+  "presets": [{ "name": "Promo Banner" }]
+}
+{% endschema %}

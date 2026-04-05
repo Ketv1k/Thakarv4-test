@@ -1,0 +1,55 @@
+<div id="review-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(10,10,30,.65);z-index:4000;backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:8px;width:100%;max-width:480px;margin:20px;position:relative;overflow:hidden;box-shadow:0 24px 64px rgba(27,42,107,.25);">
+    <div style="background:var(--royal-dark,#111C4E);padding:24px 28px;border-bottom:1px solid rgba(201,150,12,.2);">
+      <h3 style="font-family:Cormorant Garamond,serif;font-size:1.4rem;font-weight:600;color:#fff;margin:0 0 4px">Write a Review</h3>
+      <p style="font-size:.78rem;color:rgba(255,255,255,.45);margin:0">Only verified purchases can leave a review</p>
+      <button onclick="closeReviewModal()" style="position:absolute;top:20px;right:20px;background:transparent;border:none;color:rgba(255,255,255,.6);font-size:1.3rem;cursor:pointer;line-height:1;">✕</button>
+    </div>
+    <div id="review-modal-body" style="padding:28px;">
+      <!-- Step 1: verify order -->
+      <div id="review-step-1">
+        <p style="font-size:.88rem;color:var(--muted,#7A7A99);margin-bottom:20px;line-height:1.6;">To ensure authentic reviews, please enter your Order ID. Only customers who purchased this product can leave a review.</p>
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--royal-dark,#111C4E);margin-bottom:6px;">Order ID *</label>
+          <input id="review-order-id" type="text" placeholder="e.g. TK-483921" style="width:100%;padding:11px 14px;border:1.5px solid rgba(27,42,107,.15);border-radius:3px;font-family:inherit;font-size:.88rem;outline:none;"/>
+        </div>
+        <div id="review-verify-msg" style="font-size:.78rem;margin-bottom:12px;display:none;padding:8px 12px;border-radius:3px;"></div>
+        <button onclick="verifyReviewOrder()" style="width:100%;background:var(--royal,#1B2A6B);color:var(--gold-light,#E8B84B);border:none;padding:12px;border-radius:3px;font-family:inherit;font-weight:700;font-size:.88rem;cursor:pointer;letter-spacing:.04em;">Verify Purchase →</button>
+      </div>
+      <!-- Step 2: write review -->
+      <div id="review-step-2" style="display:none;">
+        <div id="review-verified-badge" style="display:flex;align-items:center;gap:8px;background:rgba(34,139,34,.08);border:1px solid rgba(34,139,34,.25);border-radius:3px;padding:10px 14px;margin-bottom:20px;">
+          <span style="color:green"><svg width="16" height="16" style="display:inline-block;vertical-align:middle;flex-shrink:0;color:green"><use href="#ico-check"/></svg></span>
+          <span style="font-size:.8rem;color:green;font-weight:600;">Verified Purchase confirmed</span>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--royal-dark,#111C4E);margin-bottom:8px;">Your Rating *</label>
+          <div id="star-picker" style="display:flex;gap:6px;font-size:1.8rem;cursor:pointer;">
+            <span class="star-pick" data-val="1" style="color:rgba(0,0,0,.2);transition:color .15s;">★</span>
+            <span class="star-pick" data-val="2" style="color:rgba(0,0,0,.2);transition:color .15s;">★</span>
+            <span class="star-pick" data-val="3" style="color:rgba(0,0,0,.2);transition:color .15s;">★</span>
+            <span class="star-pick" data-val="4" style="color:rgba(0,0,0,.2);transition:color .15s;">★</span>
+            <span class="star-pick" data-val="5" style="color:rgba(0,0,0,.2);transition:color .15s;">★</span>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--royal-dark,#111C4E);margin-bottom:6px;">Your Name *</label>
+          <input id="review-name-input" type="text" placeholder="Ravi Patel" style="width:100%;padding:11px 14px;border:1.5px solid rgba(27,42,107,.15);border-radius:3px;font-family:inherit;font-size:.88rem;outline:none;"/>
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--royal-dark,#111C4E);margin-bottom:6px;">Your Review *</label>
+          <textarea id="review-text-input" placeholder="Share your experience with this product..." style="width:100%;padding:11px 14px;border:1.5px solid rgba(27,42,107,.15);border-radius:3px;font-family:inherit;font-size:.88rem;outline:none;min-height:100px;resize:vertical;"></textarea>
+        </div>
+        <div id="review-submit-msg" style="font-size:.78rem;margin-bottom:12px;display:none;padding:8px 12px;border-radius:3px;"></div>
+        <button onclick="submitReview()" style="width:100%;background:linear-gradient(135deg,#C9960C,#E8B84B);color:#111C4E;border:none;padding:13px;border-radius:3px;font-family:inherit;font-weight:700;font-size:.9rem;cursor:pointer;letter-spacing:.06em;">Submit Review →</button>
+      </div>
+      <!-- Step 3: thank you -->
+      <div id="review-step-3" style="display:none;text-align:center;padding:20px 0;">
+        <div style="margin-bottom:16px;color:var(--gold)"><svg width="56" height="56" style="display:inline-block;vertical-align:middle;flex-shrink:0;color:var(--gold)"><use href="#ico-sparkle"/></svg></div>
+        <h4 style="font-family:Cormorant Garamond,serif;font-size:1.5rem;font-weight:600;color:var(--royal-dark,#111C4E);margin-bottom:8px;">Thank You!</h4>
+        <p style="font-size:.88rem;color:var(--muted,#7A7A99);line-height:1.65;">Your review has been submitted and will appear after verification. We truly appreciate your feedback!</p>
+        <button onclick="closeReviewModal()" style="margin-top:20px;background:var(--royal,#1B2A6B);color:var(--gold-light,#E8B84B);border:none;padding:11px 32px;border-radius:3px;font-family:inherit;font-weight:700;cursor:pointer;letter-spacing:.04em;">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

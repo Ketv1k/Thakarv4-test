@@ -1,0 +1,110 @@
+{% assign pct = 0 %}
+{% if product.compare_at_price_min > product.price_min %}
+  {% assign diff = product.compare_at_price_min | minus: product.price_min %}
+  {% assign pct = diff | times: 100 | divided_by: product.compare_at_price_min %}
+{% endif %}
+{% assign r_rating = "4.5" %}{% assign r_count = "80+" %}
+{% case product.handle %}
+  {% when 'undhiyu' %}{% assign r_rating = '4.9' %}{% assign r_count = '186' %}
+  {% when 'bateta' %}{% assign r_rating = '4.6' %}{% assign r_count = '143' %}
+  {% when 'bharela-bateta' %}{% assign r_rating = '4.4' %}{% assign r_count = '127' %}
+  {% when 'bharela-ringana' %}{% assign r_rating = '4.2' %}{% assign r_count = '98' %}
+  {% when 'gujrati-dal' %}{% assign r_rating = '4.8' %}{% assign r_count = '212' %}
+  {% when 'deshi-chana' %}{% assign r_rating = '4.5' %}{% assign r_count = '93' %}
+  {% when 'kathiyawadi-kadhi' %}{% assign r_rating = '4.5' %}{% assign r_count = '108' %}
+  {% when 'methi-papad' %}{% assign r_rating = '4.3' %}{% assign r_count = '89' %}
+  {% when 'mag' %}{% assign r_rating = '4.4' %}{% assign r_count = '112' %}
+  {% when 'vaghareli-khichdi' %}{% assign r_rating = '4.7' %}{% assign r_count = '178' %}
+  {% when 'vakhareli-khichadi' %}{% assign r_rating = '4.7' %}{% assign r_count = '178' %}
+  {% when 'kaju-butter-masala' %}{% assign r_rating = '4.9' %}{% assign r_count = '203' %}
+  {% when 'paneer-tikka' %}{% assign r_rating = '4.7' %}{% assign r_count = '189' %}
+  {% when 'paneer-but-masala' %}{% assign r_rating = '4.9' %}{% assign r_count = '247' %}
+  {% when 'paneer-rajwadi' %}{% assign r_rating = '4.6' %}{% assign r_count = '134' %}
+  {% when 'mutter-paneer' %}{% assign r_rating = '4.7' %}{% assign r_count = '167' %}
+  {% when 'punjabi-chhole' %}{% assign r_rating = '4.8' %}{% assign r_count = '198' %}
+  {% when 'dal-taraka' %}{% assign r_rating = '4.6' %}{% assign r_count = '156' %}
+  {% when 'pau-bhaji' %}{% assign r_rating = '4.8' %}{% assign r_count = '211' %}
+  {% when 'shahi-paneer' %}{% assign r_rating = '4.7' %}{% assign r_count = '156' %}
+  {% when 'palak-paneer' %}{% assign r_rating = '4.6' %}{% assign r_count = '172' %}
+{% endcase %}
+{% assign r_num = r_rating | plus: 0 %}
+
+<div class="product-card" data-name="{{ product.title | downcase | escape }}" data-tags="{{ product.tags | join: ',' | downcase }}" data-cat="{{ product.type | downcase | escape }}" data-rating="{{ r_rating }}" data-reviews="{{ r_count | remove: '+' }}">
+  <a href="{{ product.url }}" style="text-decoration:none;display:block">
+    <div class="product-img-wrap">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | img_url: '500x500' }}" alt="{{ product.title | escape }}" loading="lazy">
+      {% endif %}
+      {% if pct > 0 %}<div class="product-badge">SAVE {{ pct }}%</div>{% endif %}
+    </div>
+    <div class="product-body">
+      <div class="product-name">{{ product.title | remove: 'Ready To Eat ' | upcase }}</div>
+      <div class="product-rating-row">
+        <span class="pcr-stars">{% if r_num >= 4.5 %}★★★★★{% else %}★★★★☆{% endif %}</span>
+        <span class="pcr-review-text">{{ r_rating }} &middot; {{ r_count }}</span>
+      </div>
+      <div class="product-price-row">
+        <span class="price-new card-price-current">{{ product.price_min | money }}</span>
+        {% if product.compare_at_price_min > product.price_min %}
+          <span class="price-old">{{ product.compare_at_price_min | money }}</span>
+        {% endif %}
+      </div>
+      {% if product.variants.size > 1 %}
+        <div class="pack-btns" id="vbtns-{{ product.id }}" style="display:flex;flex-direction:row;gap:6px">
+          {% for variant in product.variants %}
+            <button class="pack-btn card-pack-btn{% if forloop.first %} active{% endif %}"
+              data-variant-id="{{ variant.id }}"
+              data-price-formatted="{{ variant.price | money }}"
+              data-price="{{ variant.price | money_without_currency | split: '.' | first }}"
+              onclick="event.preventDefault();event.stopPropagation();cardPackSelect(this,'{{ product.id }}')">
+              {{ variant.title }}
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="pc-atc-wrap" data-product-id="{{ product.id }}" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+        {% form 'product', product, data-product-title: product.title %}
+          <input type="hidden" name="id" id="vid-{{ product.id }}" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" name="add" class="add-cart-btn-full" onclick="event.stopPropagation()">ADD TO CART</button>
+        {% endform %}
+        <div class="pc-qty-ctrl" id="pc-qty-{{ product.id }}" style="display:none">
+          <button type="button" class="qty-btn" onclick="event.stopPropagation();event.preventDefault();pcQtyChange('{{ product.id }}',-1)">&#8722;</button>
+          <span class="qty-num" id="pc-qty-num-{{ product.id }}">1</span>
+          <button type="button" class="qty-btn" onclick="event.stopPropagation();event.preventDefault();pcQtyChange('{{ product.id }}',1)">+</button>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+<script>
+if (!window.cardPackSelectInit) {
+  window.cardPackSelectInit = true;
+  // onclick handler (keeps hidden form input in sync for ATC)
+  window.cardPackSelect = function(btn, productId) {
+    var vid = btn.getAttribute('data-variant-id');
+    var hiddenInput = document.getElementById('vid-' + productId);
+    if (hiddenInput && vid) hiddenInput.value = vid;
+    var atcWrap = btn.closest('.product-card') && btn.closest('.product-card').querySelector('.pc-atc-wrap');
+    if (atcWrap && vid) atcWrap.setAttribute('data-variant-id', vid);
+  };
+  // addEventListener-based init for active state + price display
+  function initCardPackBtns() {
+    document.querySelectorAll('.product-card').forEach(function(card) {
+      card.querySelectorAll('.card-pack-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          card.querySelectorAll('.card-pack-btn').forEach(function(b) { b.classList.remove('active'); });
+          this.classList.add('active');
+          var price = this.getAttribute('data-price');
+          var priceEl = card.querySelector('.card-price-current');
+          if (priceEl && price) priceEl.textContent = '₹' + price;
+        });
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCardPackBtns);
+  } else {
+    initCardPackBtns();
+  }
+}
+</script>

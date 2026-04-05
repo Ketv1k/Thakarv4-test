@@ -1,0 +1,74 @@
+<div class="page-header">
+  <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <span>Order Tracking</span></div>
+  <h1>Track Your <em>Order</em></h1>
+</div>
+
+<div class="ot-page">
+  <div class="ot-card">
+    <h2 class="ot-heading">Track Your Order</h2>
+    <p class="ot-subtext">Enter your order details to check your delivery status.</p>
+
+    <div class="ot-form" id="ot-form">
+      <div class="ot-field">
+        <label class="ot-label" for="ot-order-number">Order Number</label>
+        <input class="ot-input" id="ot-order-number" type="text"
+          placeholder="Enter your order number e.g. #1001"
+          autocomplete="off">
+      </div>
+      <div class="ot-field">
+        <label class="ot-label" for="ot-mobile">Mobile Number</label>
+        <input class="ot-input" id="ot-mobile" type="tel"
+          placeholder="Enter your 10-digit mobile number"
+          maxlength="10" autocomplete="off">
+      </div>
+      <div class="ot-error" id="ot-error" style="display:none"></div>
+      <button class="ot-btn" id="ot-submit" type="button">Track Order</button>
+    </div>
+  </div>
+
+  <div class="ot-card ot-wa-card">
+    <p class="ot-wa-text">Need help with your order? Chat with us directly:</p>
+    <a href="https://wa.me/918238899993?text=Hi! I want to track my order."
+       class="ot-wa-btn" target="_blank" rel="noopener">Chat on WhatsApp</a>
+  </div>
+</div>
+
+<script>
+document.getElementById('ot-submit').addEventListener('click', function() {
+  var orderNum = document.getElementById('ot-order-number').value.trim();
+  var mobile   = document.getElementById('ot-mobile').value.trim();
+  var errEl    = document.getElementById('ot-error');
+
+  if (!orderNum) {
+    errEl.textContent = 'Please enter your order number.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (!mobile || !/^\d{10}$/.test(mobile)) {
+    errEl.textContent = 'Please enter a valid 10-digit mobile number.';
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  window.location.href = 'https://shiprocket.co/tracking/' + encodeURIComponent(orderNum);
+});
+
+// Allow Enter key on either input
+['ot-order-number', 'ot-mobile'].forEach(function(id) {
+  document.getElementById(id).addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('ot-submit').click();
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Order Tracking",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Order Tracking"
+    }
+  ]
+}
+{% endschema %}

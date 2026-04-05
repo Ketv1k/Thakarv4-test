@@ -1,0 +1,120 @@
+<div class="faq-page">
+  <div class="faq-header">
+    <h1 class="faq-title">Frequently Asked Questions</h1>
+    <p class="faq-subtitle">Everything you need to know about Thakar Kitchen</p>
+  </div>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>What is Retort Technology?</span>
+        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <p>Retort technology is the same process used to make food for astronauts and the Indian Army. The food is sealed in a pouch and cooked at high heat and pressure — killing all bacteria naturally. No preservatives needed. The result is shelf-stable food that tastes exactly like freshly made.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>No preservatives — how does it last 12 months?</span>
+        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <p>Because of Retort Technology. The high-heat sterilisation process eliminates all microorganisms inside the sealed pouch. As long as the seal is intact, nothing can spoil it — no preservatives, no chemicals, just science.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>How is it different from dehydrated food?</span>
+        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <p>Dehydrated food removes all moisture — you need to add water and cook it. Thakar Kitchen is fully cooked, ready food. Open the pouch, heat for 3 minutes, eat. Taste, texture and nutrition are all preserved — just like mom made it.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>How do I heat it?</span>
+        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <p>Two ways — drop the sealed pouch in boiling water for 3–4 minutes, or cut open and heat in a pan for 2–3 minutes on medium flame. No microwave needed.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>Is it safe for kids and elderly?</span>
+        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. No artificial preservatives, no added colours, made with 100% groundnut oil. The ingredients are the same ones used in any Indian home kitchen. Safe for the whole family.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>Do I need to refrigerate it?</span>
+        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <p>No. Store in a cool dry place — shelf, cupboard, bag. No fridge needed until after you open the pouch. Once opened, consume immediately.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>Can I carry it while travelling or on flights?</span>
+        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <p>Yes — that's one of the best things about it. Lightweight, no spill risk, no refrigeration needed. Trains, road trips, flights, hostels — Thakar Kitchen goes wherever you go.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('faq-open');
+      // Close all
+      document.querySelectorAll('.faq-item.faq-open').forEach(function(open) {
+        open.classList.remove('faq-open');
+        open.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      // Open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('faq-open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": []
+}
+{% endschema %}

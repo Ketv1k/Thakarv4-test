@@ -1,0 +1,45 @@
+{
+  "sections": {
+    "ann": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "Free delivery on orders above \u20b9500"
+      }
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "trust": {
+      "type": "trust-bar",
+      "settings": {}
+    },
+    "cats": {
+      "type": "categories",
+      "settings": {}
+    },
+    "best": {
+      "type": "featured-collection",
+      "settings": {
+        "limit": 8
+      }
+    },
+    "why": {
+      "type": "why-us",
+      "settings": {}
+    },
+    "testi": {
+      "type": "testimonials",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ann",
+    "hero",
+    "trust",
+    "cats",
+    "best",
+    "why",
+    "testi"
+  ]
+}
